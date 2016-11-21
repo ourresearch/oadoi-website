@@ -70,29 +70,29 @@ def add_crossdomain_header(resp):
 
 
 
-# @app.before_request
-# def stuff_before_request():
-#     # redirect everything else to https.
-#     new_url = None
-#     try:
-#         if request.headers["X-Forwarded-Proto"] == "https":
-#             pass
-#         elif "http://" in request.url:
-#             new_url = request.url.replace("http://", "https://")
-#     except KeyError:
-#         # print "There's no X-Forwarded-Proto header; assuming localhost, serving http."
-#         pass
-#
-#     # redirect to naked domain from www
-#     if request.url.startswith("https://www.oadoi.org"):
-#         new_url = request.url.replace(
-#             "https://www.oadoi.org",
-#             "https://oadoi.org"
-#         )
-#         print u"URL starts with www; redirecting to " + new_url
-#
-#     if new_url:
-#         return redirect(new_url, 301)  # permanent
+@app.before_request
+def stuff_before_request():
+    # redirect everything else to https.
+    new_url = None
+    try:
+        if request.headers["X-Forwarded-Proto"] == "https":
+            pass
+        elif "http://" in request.url:
+            new_url = request.url.replace("http://", "https://")
+    except KeyError:
+        # print "There's no X-Forwarded-Proto header; assuming localhost, serving http."
+        pass
+
+    # redirect to naked domain from www
+    if request.url.startswith("https://www.oadoi.org"):
+        new_url = request.url.replace(
+            "https://www.oadoi.org",
+            "https://oadoi.org"
+        )
+        print u"URL starts with www; redirecting to " + new_url
+
+    if new_url:
+        return redirect(new_url, 301)  # permanent
 
 
 
