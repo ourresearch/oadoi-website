@@ -120,7 +120,6 @@ body .nav .links {
   display: flex;
   height: 100%;
   align-items: flex-start;
-  text-transform: lowercase;
 }
 @media only screen and (max-width: 415px) {
   body .nav .links {
