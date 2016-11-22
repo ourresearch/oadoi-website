@@ -3,9 +3,9 @@ from flask import request
 from flask import redirect
 from flask import abort
 from flask import render_template
-from flask import jsonify
-from flask import g
 from flask import url_for
+
+import requests
 
 import json
 import os
@@ -128,17 +128,24 @@ def bookmarklet_js():
 @app.route("/")
 def index_endpoint(doi=""):
 
-    # the web interface (returns an SPA webpage that runs AngularJS)
-    if not doi or not doi.startswith("10."):
+    # the DOI resolver (redirects to the article)
+    if doi and doi.startswith("10."):
+
+        resp = requests.get("https://api.oadoi.org/" + doi)
+        data = resp.json()["results"][0]
+        if data["free_fulltext_url"]:
+            url = data["free_fulltext_url"]
+        else:
+            url = data["url"]
+
+        return redirect(url, 302)  # 302 is temporary redirect
+
+    # no DOI, so return the Angular app
+    else:
         return render_template(
             'index.html'
         )
 
-    # the DOI resolver (returns a redirect)
-
-    # call the api here and then server the redirect
-    # return redirect(my_pub.best_redirect_url, 302)  # 302 is temporary redirect
-    pass
 
 
 if __name__ == "__main__":
