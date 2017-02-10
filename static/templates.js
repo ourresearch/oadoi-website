@@ -69,14 +69,15 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "    <h1>API</h1>\n" +
     "    <p>\n" +
     "        The REST API allows programmatic access to read oaDOI's data. It's free and open for anyone to use.\n" +
-    "        The rate limit is 10k requests per day, but get in touch if you need more and we'll hook you up.\n" +
-    "        <br>Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something\n" +
+    "        The rate limit is 25k requests per day, but get in touch if you need more and we'll hook you up.\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something\n" +
     "        breaks, and so we can report usage to our funders :).\n" +
     "    </p>\n" +
     "\n" +
     "\n" +
     "    <h2 id=\"return-format\">Endpoints</h2>\n" +
-    "\n" +
     "\n" +
     "    <div class=\"endpoint\">\n" +
     "        <code class=\"endpoint\">GET /</code>\n" +
@@ -93,12 +94,9 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "    <div class=\"endpoint\">\n" +
     "        <code class=\"endpoint\">GET /:doi</code>\n" +
     "        <p>\n" +
-    "            Gets data about a single DOI.\n" +
-    "            Although this is not a good method to use if you have a lot of DOIs,\n" +
-    "            it's handy for testing because you can run it in\n" +
-    "            your browser. Try this example:\n" +
+    "            Gets data about a single DOI.  Try this example:\n" +
     "            <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373</a>\n" +
-    "\n" +
+    "        </p>\n" +
     "    </div>\n" +
     "\n" +
     "\n" +

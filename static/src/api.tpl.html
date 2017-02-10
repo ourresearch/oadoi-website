@@ -2,14 +2,15 @@
     <h1>API</h1>
     <p>
         The REST API allows programmatic access to read oaDOI's data. It's free and open for anyone to use.
-        The rate limit is 10k requests per day, but get in touch if you need more and we'll hook you up.
-        <br>Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something
+        The rate limit is 25k requests per day, but get in touch if you need more and we'll hook you up.
+    </p>
+    <p>
+        Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something
         breaks, and so we can report usage to our funders :).
     </p>
 
 
     <h2 id="return-format">Endpoints</h2>
-
 
     <div class="endpoint">
         <code class="endpoint">GET /</code>
@@ -26,12 +27,9 @@
     <div class="endpoint">
         <code class="endpoint">GET /:doi</code>
         <p>
-            Gets data about a single DOI.
-            Although this is not a good method to use if you have a lot of DOIs,
-            it's handy for testing because you can run it in
-            your browser. Try this example:
+            Gets data about a single DOI.  Try this example:
             <a href="https://api.oadoi.org/10.1038/nature12373">https://api.oadoi.org/10.1038/nature12373</a>
-
+        </p>
     </div>
 
 
