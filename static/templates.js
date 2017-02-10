@@ -69,15 +69,9 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "    <h1>API</h1>\n" +
     "    <p>\n" +
     "        The REST API allows programmatic access to read oaDOI's data. It's free and open for anyone to use.\n" +
-    "\n" +
-    "\n" +
-    "        <!--\n" +
-    "        Just please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something\n" +
+    "        The rate limit is 10k requests per day, but get in touch if you need more and we'll hook you up.\n" +
+    "        <br>Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something\n" +
     "        breaks, and so we can report usage to our funders :).\n" +
-    "        -->\n" +
-    "\n" +
-    "        The rate limit is 10k requests per day, but\n" +
-    "        get in touch if you need more and we'll hook you up.\n" +
     "    </p>\n" +
     "\n" +
     "\n" +
@@ -107,7 +101,6 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "    </div>\n" +
     "\n" +
-    "    \n" +
     "\n" +
     "    <h2 id=\"return-format\">Return format</h2>\n" +
     "    <div>\n" +
@@ -158,10 +151,13 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        compatibility) for six months. The current major version (v1) came out\n" +
     "        around November 1st, so it'll be supported through April 2017.\n" +
     "    </p>\n" +
+    "\n" +
+    "    <!--\n" +
     "    <p>If your implementation must be tied to a specific major version of our API, use content-negotiation\n" +
     "        to request that version of the API by sending an <code>ACCEPT</code> header like this:\n" +
     "    </p>\n" +
     "    <pre><code>Accept: application/x.oadoi.v1+json</code></pre>\n" +
+    "    -->\n" +
     "\n" +
     "\n" +
     "    <h2 id=\"examples\">Client libraries and example uses</h2>\n" +

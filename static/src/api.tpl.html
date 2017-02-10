@@ -2,15 +2,9 @@
     <h1>API</h1>
     <p>
         The REST API allows programmatic access to read oaDOI's data. It's free and open for anyone to use.
-
-
-        <!--
-        Just please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something
+        The rate limit is 10k requests per day, but get in touch if you need more and we'll hook you up.
+        <br>Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something
         breaks, and so we can report usage to our funders :).
-        -->
-
-        The rate limit is 10k requests per day, but
-        get in touch if you need more and we'll hook you up.
     </p>
 
 
@@ -39,7 +33,6 @@
             <a href="https://api.oadoi.org/10.1038/nature12373">https://api.oadoi.org/10.1038/nature12373</a>
 
     </div>
-
 
 
     <h2 id="return-format">Return format</h2>
@@ -91,10 +84,13 @@
         compatibility) for six months. The current major version (v1) came out
         around November 1st, so it'll be supported through April 2017.
     </p>
+
+    <!--
     <p>If your implementation must be tied to a specific major version of our API, use content-negotiation
         to request that version of the API by sending an <code>ACCEPT</code> header like this:
     </p>
     <pre><code>Accept: application/x.oadoi.v1+json</code></pre>
+    -->
 
 
     <h2 id="examples">Client libraries and example uses</h2>
