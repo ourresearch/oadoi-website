@@ -1,22 +1,26 @@
 <div class="page api">
     <h1>API</h1>
     <p>
-        The REST API allows programmatic access to read oaDOI's data. It's free and open for anyone to use.
-        The rate limit is 25k requests per day, but get in touch if you need more and we'll hook you up.
+        Our REST API allows programmatic access to oaDOI's data. It's free and open for anyone to use.
+        There's no rate limit, although if you need more than 100k calls/day you
+        may want to use our data dump instead.
     </p>
     <p>
         Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something
-        breaks, and so we can report usage to our funders :).
+        breaks, and so we can report usage to our funders.
     </p>
 
 
     <h2 id="return-format">Endpoints</h2>
+    <p>
+        The API is very simple, and has just two endpoints. Both are read-only.
+    </p>
 
     <div class="endpoint">
+        <p>
         <code class="endpoint">GET /</code>
 
-        <p>
-            Gets information about the API.
+            gets information about the API.
             Returns a status object with version number. Try it here:
              <a href="https://api.oadoi.org">https://api.oadoi.org</a>
         </p>
@@ -25,9 +29,9 @@
 
 
     <div class="endpoint">
-        <code class="endpoint">GET /:doi</code>
         <p>
-            Gets data about a single DOI.  Try this example:
+        <code class="endpoint">GET /:doi</code>
+            gets data about a single DOI.  Try this example:
             <a href="https://api.oadoi.org/10.1038/nature12373">https://api.oadoi.org/10.1038/nature12373</a>
         </p>
     </div>
@@ -50,8 +54,9 @@
       "url": "http://doi.org/10.1038/nature12873"
     }</code></pre>
 
-    Details on the response field. These are in progress; we'll continue to improve them this week:
-    <ul>
+    Here are some notes on the response fields. The fields shown are stable, but
+    additional ones may be added over time, so don't count on the number of keys.
+    <ul class="response-details">
         <li><code>doi</code>: the requested DOI</li>
         <li><code>doi_resolver</code>: String. Possible values:
             <ul>
@@ -75,20 +80,6 @@
 
     </ul>
 
-    <h2 id="versions">Versions</h2>
-    <p>The API <a href="http://semver.org/">is versioned,</a> and the
-        <a href="https://api.oadoi.org">API base URL</a> specifies the current version.
-        We're committed to supporting major releases (ones that break backwards
-        compatibility) for six months. The current major version (v1) came out
-        around November 1st, so it'll be supported through April 2017.
-    </p>
-
-    <!--
-    <p>If your implementation must be tied to a specific major version of our API, use content-negotiation
-        to request that version of the API by sending an <code>ACCEPT</code> header like this:
-    </p>
-    <pre><code>Accept: application/x.oadoi.v1+json</code></pre>
-    -->
 
 
     <h2 id="examples">Client libraries and example uses</h2>
@@ -105,18 +96,17 @@
             <a href="http://guides.lib.wayne.edu/c.php?g=174735&p=2659947#s-lg-box-wrapper-14700556">Wayne State LibGuides.</a>
         </li>
         <li>
-            <a href="https://www.mpdl.mpg.de/en/services/service-catalog/sfx">The SFX DOI lookup service</a>
-            from Max Planck Digital Library uses oaDOI.
-            Here's an <a href="http://sfx.mpg.de/sfx_local?id=doi:10.1142/S0219622014500564">example result,</a>
-            and <a href="https://devtools.mpdl.mpg.de/projects/vlib/wiki/SFXTargets/oaDOIgetFullTxt">some documentation</a>
-            by <a href="https://twitter.com/grumpf/status/791773184764805120">@grumpf.</a>
-        </li>
-        <li>
             Zotero can use oaDOI as
             <a href="https://www.zotero.org/support/locate">a lookup engine.</a> Here's
             <a href="https://github.com/Impactstory/oadoi/pull/1#issuecomment-255518267">a screencast of it in action.</a>
         </li>
     </ul>
 
+    <h2 id="dataset">Download the entire dataset</h2>
+    <p>
+        We're working on releasing the entire oaDOI knowledge base as a downloadable dataset.
+        It should be ready in early April. Until then, feel free to contact us and we can send you
+        whatever we have got so far.
+    </p>
 
 </div>

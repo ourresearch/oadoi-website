@@ -1,17 +1,23 @@
 <div class="page landing">
-    <div class="top-screen" layout="row" layout-align="center center">
+    <div class="top-screen">
         <div class="content">
             <div class="main-banner">
                 <div class="tagline">
                     <span class="number">{{ d.numServed }}</span>
-                    <span class="text">fulltext articles served.</span>
+                    <span class="text">fulltext requests served.</span>
                 </div>
                 <div class="subtagline">
-                    Search our database of over 100 million scholarly resources
-                    and find free fulltext from open-access repositories worldwide.
+                    Use our database of over 100 million scholarly resources
+                    to find free fulltext from open-access repositories worldwide.
+                </div>
+                <div class="more" ng-click="scrollToMore()" id="show-rest-of-landing-page">
+                    <i class="fa fa-chevron-down"></i>
+                    more
                 </div>
             </div>
-            <div class="products">
+
+
+            <div class="products" id="products-section">
                 <div class="product unpaywall">
                     <div class="text">
                         <h2>
@@ -24,7 +30,7 @@
                             500 new users every day.
                         </div>
                     </div>
-                    <div class="cta">Install it now</div>
+                    <a class="cta" href="/unpaywall">Learn more</a>
                 </div>
                 <div class="product sfx">
                     <div class="text">
@@ -37,7 +43,7 @@
                             to your library's holdings. Used by 600 libraries worldwide.
                         </div>
                     </div>
-                    <div class="cta">Learn more</div>
+                    <a class="cta" href="/sfx">Learn more</a>
                 </div>
                 <div class="product api">
                     <div class="text">
@@ -50,15 +56,14 @@
                             our free, open, and scalable REST API.
                         </div>
                     </div>
-                    <div class="cta">Read the docs</div>
+                    <a class="cta" href="/api">Learn more</a>
                 </div>
-
-
 
             </div>
 
-
         </div>
+
     </div>
 
 </div>
+

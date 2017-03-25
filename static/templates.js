@@ -1,7 +1,178 @@
-angular.module('templates.app', ['about.tpl.html', 'api.tpl.html', 'browser-tools.tpl.html', 'landing.tpl.html', 'team.tpl.html']);
+angular.module('templates.app', ['api.tpl.html', 'browser-tools.tpl.html', 'faq.tpl.html', 'footer.tpl.html', 'landing.tpl.html', 'sfx.tpl.html', 'team.tpl.html', 'unpaywall.tpl.html']);
 
-angular.module("about.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("about.tpl.html",
+angular.module("api.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("api.tpl.html",
+    "<div class=\"page api\">\n" +
+    "    <h1>API</h1>\n" +
+    "    <p>\n" +
+    "        Our REST API allows programmatic access to oaDOI's data. It's free and open for anyone to use.\n" +
+    "        There's no rate limit, although if you need more than 100k calls/day you\n" +
+    "        may want to use our data dump instead.\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something\n" +
+    "        breaks, and so we can report usage to our funders.\n" +
+    "    </p>\n" +
+    "\n" +
+    "\n" +
+    "    <h2 id=\"return-format\">Endpoints</h2>\n" +
+    "    <p>\n" +
+    "        The API is very simple, and has just two endpoints. Both are read-only.\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <div class=\"endpoint\">\n" +
+    "        <p>\n" +
+    "        <code class=\"endpoint\">GET /</code>\n" +
+    "\n" +
+    "            gets information about the API.\n" +
+    "            Returns a status object with version number. Try it here:\n" +
+    "             <a href=\"https://api.oadoi.org\">https://api.oadoi.org</a>\n" +
+    "        </p>\n" +
+    "\n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "    <div class=\"endpoint\">\n" +
+    "        <p>\n" +
+    "        <code class=\"endpoint\">GET /:doi</code>\n" +
+    "            gets data about a single DOI.  Try this example:\n" +
+    "            <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373</a>\n" +
+    "        </p>\n" +
+    "    </div>\n" +
+    "\n" +
+    "\n" +
+    "    <h2 id=\"return-format\">Return format</h2>\n" +
+    "    <div>\n" +
+    "        Here's an example of what you get back.\n" +
+    "    </div>\n" +
+    "    <pre><code class=\"json\">{\n" +
+    "      \"doi\": \"10.1038/nature12873\",\n" +
+    "      \"doi_resolver\": \"crossref\",\n" +
+    "      \"evidence\": \"oa repository (via base-search.net oa url)\",\n" +
+    "      \"free_fulltext_url\": \"https://dash.harvard.edu/bitstream/handle/1/12785839/3944098.pdf?sequence=1\",\n" +
+    "      \"is_boai_license\": false,\n" +
+    "      \"is_free_to_read\": true,\n" +
+    "      \"is_subscription_journal\": true,\n" +
+    "      \"license\": \"cc-by-nc\",\n" +
+    "      \"oa_color\": \"green\",\n" +
+    "      \"url\": \"http://doi.org/10.1038/nature12873\"\n" +
+    "    }</code></pre>\n" +
+    "\n" +
+    "    Here are some notes on the response fields. The fields shown are stable, but\n" +
+    "    additional ones may be added over time, so don't count on the number of keys.\n" +
+    "    <ul class=\"response-details\">\n" +
+    "        <li><code>doi</code>: the requested DOI</li>\n" +
+    "        <li><code>doi_resolver</code>: String. Possible values:\n" +
+    "            <ul>\n" +
+    "                <li>crossref</li>\n" +
+    "                <li>datacite</li>\n" +
+    "            </ul>\n" +
+    "        </li>\n" +
+    "        <li><code>evidence</code>: String. A phrase summarizing the step of our OA detection process where we found the <code>free_fulltext_url</code>.</li>\n" +
+    "        <li><code>free_fulltext_url</code>: String. The url where we found a free-to-read version of the DOI. None when no free-to-read version was found.\n" +
+    "        <li><code>is_boai_license</code>: Boolean. True whenever the <code>license</code> is cc-by, cc0, or PD.  This is the highly-regarded <a href=\"http://www.budapestopenaccessinitiative.org/read\">BOAI definition</a> of Open access</li>\n" +
+    "        <li><code>is_free_to_read</code>: Boolean. True whenever the <code>free_fulltext_url</code> is not None.</li>\n" +
+    "        <li><code>is_subscription_journal</code>: Boolean. True whenever the journal is not in the Directory of Open Access Journals or DataCite.</li>\n" +
+    "        <li><code>license</code>: String. Contains the name of the Creative Commons license associated with the <code>free_fulltext_url</code>, whenever we find one.  Example: \"cc-by\".</li>\n" +
+    "        <li><code>oa_color</code>: String. Possible values:\n" +
+    "            <ul>\n" +
+    "                <li>green</li>\n" +
+    "                <li>gold</li>\n" +
+    "            </ul>\n" +
+    "        </li>\n" +
+    "        <li><code>url</code>: the canonical DOI URL</li>\n" +
+    "\n" +
+    "    </ul>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "    <h2 id=\"examples\">Client libraries and example uses</h2>\n" +
+    "    The API is still new but there are already some great examples of folks using it. Drop us a line\n" +
+    "    if you've got something; we'd love to add you to this list. In no particular order:\n" +
+    "    <ul>\n" +
+    "        <li>\n" +
+    "            <a href=\"https://github.com/njahn82/roadoi\">roadoi</a> is an R wrapper around the oaDOI API.\n" +
+    "            Has a nice README that includes a really slick usage example.\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            <a href=\"https://github.com/claytonllibrar/oaDOI-LibGuides-Widget\">oaDOI-LibGuides-Widget</a>\n" +
+    "            lets you search oaDOI from within a LibGuide. Here's an example from\n" +
+    "            <a href=\"http://guides.lib.wayne.edu/c.php?g=174735&p=2659947#s-lg-box-wrapper-14700556\">Wayne State LibGuides.</a>\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            Zotero can use oaDOI as\n" +
+    "            <a href=\"https://www.zotero.org/support/locate\">a lookup engine.</a> Here's\n" +
+    "            <a href=\"https://github.com/Impactstory/oadoi/pull/1#issuecomment-255518267\">a screencast of it in action.</a>\n" +
+    "        </li>\n" +
+    "    </ul>\n" +
+    "\n" +
+    "    <h2 id=\"dataset\">Download the entire dataset</h2>\n" +
+    "    <p>\n" +
+    "        We're working on releasing the entire oaDOI knowledge base as a downloadable dataset.\n" +
+    "        It should be ready in early April. Until then, feel free to contact us and we can send you\n" +
+    "        whatever we have got so far.\n" +
+    "    </p>\n" +
+    "\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("browser-tools.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("browser-tools.tpl.html",
+    "<div class=\"page browser-tools\">\n" +
+    "    <h1>Browser tools</h1>\n" +
+    "\n" +
+    "        <p>\n" +
+    "        The power of oaDOI is now available as a Chrome Extension!  As you browse,\n" +
+    "        </p>\n" +
+    "\n" +
+    "\n" +
+    "    <!--\n" +
+    "        <p>\n" +
+    "            These tools do more or less the same thing: when you're\n" +
+    "            viewing the landing page for a scholarly article, they'll use oaDOI to find\n" +
+    "            any open versions of that article. Both of them only work on pages\n" +
+    "            with DOIs.\n" +
+    "        </p>\n" +
+    "\n" +
+    "\n" +
+    "        <h2>Chrome Extension</h2>\n" +
+    "        <p>\n" +
+    "            The beta release is now available! Install it via the Chrome Web Store:\n" +
+    "            <a href=\"https://chrome.google.com/webstore/detail/getthepdf/iplffkdpngmdjhlpjmppncnlhomiipha\">\n" +
+    "                un\n" +
+    "            </a>\n" +
+    "        </p>\n" +
+    "\n" +
+    "\n" +
+    "        <h2>Bookmarklet <span class=\"beta\">beta</span> </h2>\n" +
+    "        <p>\n" +
+    "            Drag the link up to your bookmarks toolbar. When you're viewing an article\n" +
+    "            landing page, click the bookmark. If we can find open fulltext for it anywhere,\n" +
+    "            we'll redirect you there.\n" +
+    "        </p>\n" +
+    "        <p>\n" +
+    "            <span class=\"instructions\">\n" +
+    "                Drag this link to your bookmarks toolbar:\n" +
+    "            </span>\n" +
+    "            <a class=\"bookmarklet-link\" href=\"javascript:(function () {var jsCode = document.createElement('script'); jsCode.setAttribute('src', '//oadoi.org/browser-tools/bookmarklet.js');document.body.appendChild(jsCode);  }());\">oaDOI it</a>\n" +
+    "        </p>\n" +
+    "\n" +
+    "\n" +
+    "        <p>\n" +
+    "            The tool is in beta right now, so we're really interested in your feedback.\n" +
+    "            <a href=\"mailto:team@impactstory.org\">Drop us a line</a> with bug reports\n" +
+    "            and feature ideas!\n" +
+    "        </p>\n" +
+    "\n" +
+    "    -->\n" +
+    "\n" +
+    "</div>\n" +
+    "");
+}]);
+
+angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("faq.tpl.html",
     "<div class=\"page about\">\n" +
     "    <h1>About</h1>\n" +
     "    <p>\n" +
@@ -63,203 +234,53 @@ angular.module("about.tpl.html", []).run(["$templateCache", function($templateCa
     "");
 }]);
 
-angular.module("api.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("api.tpl.html",
-    "<div class=\"page api\">\n" +
-    "    <h1>API</h1>\n" +
-    "    <p>\n" +
-    "        The REST API allows programmatic access to read oaDOI's data. It's free and open for anyone to use.\n" +
-    "        The rate limit is 25k requests per day, but get in touch if you need more and we'll hook you up.\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something\n" +
-    "        breaks, and so we can report usage to our funders :).\n" +
-    "    </p>\n" +
-    "\n" +
-    "\n" +
-    "    <h2 id=\"return-format\">Endpoints</h2>\n" +
-    "\n" +
-    "    <div class=\"endpoint\">\n" +
-    "        <code class=\"endpoint\">GET /</code>\n" +
-    "\n" +
-    "        <p>\n" +
-    "            Gets information about the API.\n" +
-    "            Returns a status object with version number. Try it here:\n" +
-    "             <a href=\"https://api.oadoi.org\">https://api.oadoi.org</a>\n" +
-    "        </p>\n" +
-    "\n" +
+angular.module("footer.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("footer.tpl.html",
+    "<div class=\"page-footer\">\n" +
+    "    <div class=\"by\">\n" +
+    "        Made with <i class=\"fa fa-heart-o\"></i> by\n" +
+    "        <a href=\"/faq#who-is-behind-this\">Impactstory.</a>\n" +
     "    </div>\n" +
-    "\n" +
-    "\n" +
-    "    <div class=\"endpoint\">\n" +
-    "        <code class=\"endpoint\">GET /:doi</code>\n" +
-    "        <p>\n" +
-    "            Gets data about a single DOI.  Try this example:\n" +
-    "            <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373</a>\n" +
-    "        </p>\n" +
+    "    <div class=\"spacer\"></div>\n" +
+    "    <div class=\"links\">\n" +
+    "        <a href=\"mailto:team@impactstory.org\">\n" +
+    "            <i class=\"fa fa-envelope-o\"></i>\n" +
+    "            <span class=\"text\">email</span>\n" +
+    "        </a>\n" +
+    "        <a href=\"http://twitter.com/unpaywall\">\n" +
+    "            <i class=\"fa fa-twitter\"></i>\n" +
+    "            <span class=\"text\">twitter</span>\n" +
+    "        </a>\n" +
+    "        <a href=\"https://github.com/Impactstory/unpaywall\">\n" +
+    "            <i class=\"fa fa-github\"></i>\n" +
+    "            <span class=\"text\">github</span>\n" +
+    "        </a>\n" +
     "    </div>\n" +
-    "\n" +
-    "\n" +
-    "    <h2 id=\"return-format\">Return format</h2>\n" +
-    "    <div>\n" +
-    "        Here's an example of what you get back.\n" +
-    "    </div>\n" +
-    "    <pre><code class=\"json\">{\n" +
-    "      \"doi\": \"10.1038/nature12873\",\n" +
-    "      \"doi_resolver\": \"crossref\",\n" +
-    "      \"evidence\": \"oa repository (via base-search.net oa url)\",\n" +
-    "      \"free_fulltext_url\": \"https://dash.harvard.edu/bitstream/handle/1/12785839/3944098.pdf?sequence=1\",\n" +
-    "      \"is_boai_license\": false,\n" +
-    "      \"is_free_to_read\": true,\n" +
-    "      \"is_subscription_journal\": true,\n" +
-    "      \"license\": \"cc-by-nc\",\n" +
-    "      \"oa_color\": \"green\",\n" +
-    "      \"url\": \"http://doi.org/10.1038/nature12873\"\n" +
-    "    }</code></pre>\n" +
-    "\n" +
-    "    Details on the response field. These are in progress; we'll continue to improve them this week:\n" +
-    "    <ul>\n" +
-    "        <li><code>doi</code>: the requested DOI</li>\n" +
-    "        <li><code>doi_resolver</code>: String. Possible values:\n" +
-    "            <ul>\n" +
-    "                <li>crossref</li>\n" +
-    "                <li>datacite</li>\n" +
-    "            </ul>\n" +
-    "        </li>\n" +
-    "        <li><code>evidence</code>: String. A phrase summarizing the step of our OA detection process where we found the <code>free_fulltext_url</code>.</li>\n" +
-    "        <li><code>free_fulltext_url</code>: String. The url where we found a free-to-read version of the DOI. None when no free-to-read version was found.\n" +
-    "        <li><code>is_boai_license</code>: Boolean. True whenever the <code>license</code> is cc-by, cc0, or PD.  This is the highly-regarded <a href=\"http://www.budapestopenaccessinitiative.org/read\">BOAI definition</a> of Open access</li>\n" +
-    "        <li><code>is_free_to_read</code>: Boolean. True whenever the <code>free_fulltext_url</code> is not None.</li>\n" +
-    "        <li><code>is_subscription_journal</code>: Boolean. True whenever the journal is not in the Directory of Open Access Journals or DataCite.</li>\n" +
-    "        <li><code>license</code>: String. Contains the name of the Creative Commons license associated with the <code>free_fulltext_url</code>, whenever we find one.  Example: \"cc-by\".</li>\n" +
-    "        <li><code>oa_color</code>: String. Possible values:\n" +
-    "            <ul>\n" +
-    "                <li>green</li>\n" +
-    "                <li>gold</li>\n" +
-    "            </ul>\n" +
-    "        </li>\n" +
-    "        <li><code>url</code>: the canonical DOI URL</li>\n" +
-    "\n" +
-    "    </ul>\n" +
-    "\n" +
-    "    <h2 id=\"versions\">Versions</h2>\n" +
-    "    <p>The API <a href=\"http://semver.org/\">is versioned,</a> and the\n" +
-    "        <a href=\"https://api.oadoi.org\">API base URL</a> specifies the current version.\n" +
-    "        We're committed to supporting major releases (ones that break backwards\n" +
-    "        compatibility) for six months. The current major version (v1) came out\n" +
-    "        around November 1st, so it'll be supported through April 2017.\n" +
-    "    </p>\n" +
-    "\n" +
-    "    <!--\n" +
-    "    <p>If your implementation must be tied to a specific major version of our API, use content-negotiation\n" +
-    "        to request that version of the API by sending an <code>ACCEPT</code> header like this:\n" +
-    "    </p>\n" +
-    "    <pre><code>Accept: application/x.oadoi.v1+json</code></pre>\n" +
-    "    -->\n" +
-    "\n" +
-    "\n" +
-    "    <h2 id=\"examples\">Client libraries and example uses</h2>\n" +
-    "    The API is still new but there are already some great examples of folks using it. Drop us a line\n" +
-    "    if you've got something; we'd love to add you to this list. In no particular order:\n" +
-    "    <ul>\n" +
-    "        <li>\n" +
-    "            <a href=\"https://github.com/njahn82/roadoi\">roadoi</a> is an R wrapper around the oaDOI API.\n" +
-    "            Has a nice README that includes a really slick usage example.\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"https://github.com/claytonllibrar/oaDOI-LibGuides-Widget\">oaDOI-LibGuides-Widget</a>\n" +
-    "            lets you search oaDOI from within a LibGuide. Here's an example from\n" +
-    "            <a href=\"http://guides.lib.wayne.edu/c.php?g=174735&p=2659947#s-lg-box-wrapper-14700556\">Wayne State LibGuides.</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"https://www.mpdl.mpg.de/en/services/service-catalog/sfx\">The SFX DOI lookup service</a>\n" +
-    "            from Max Planck Digital Library uses oaDOI.\n" +
-    "            Here's an <a href=\"http://sfx.mpg.de/sfx_local?id=doi:10.1142/S0219622014500564\">example result,</a>\n" +
-    "            and <a href=\"https://devtools.mpdl.mpg.de/projects/vlib/wiki/SFXTargets/oaDOIgetFullTxt\">some documentation</a>\n" +
-    "            by <a href=\"https://twitter.com/grumpf/status/791773184764805120\">@grumpf.</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            Zotero can use oaDOI as\n" +
-    "            <a href=\"https://www.zotero.org/support/locate\">a lookup engine.</a> Here's\n" +
-    "            <a href=\"https://github.com/Impactstory/oadoi/pull/1#issuecomment-255518267\">a screencast of it in action.</a>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "\n" +
-    "\n" +
-    "</div>\n" +
-    "");
-}]);
-
-angular.module("browser-tools.tpl.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("browser-tools.tpl.html",
-    "<div class=\"page browser-tools\">\n" +
-    "    <h1>Browser tools</h1>\n" +
-    "\n" +
-    "        <p>\n" +
-    "        The power of oaDOI is now available as a Chrome Extension!  As you browse,\n" +
-    "        </p>\n" +
-    "\n" +
-    "\n" +
-    "    <!--\n" +
-    "        <p>\n" +
-    "            These tools do more or less the same thing: when you're\n" +
-    "            viewing the landing page for a scholarly article, they'll use oaDOI to find\n" +
-    "            any open versions of that article. Both of them only work on pages\n" +
-    "            with DOIs.\n" +
-    "        </p>\n" +
-    "\n" +
-    "\n" +
-    "        <h2>Chrome Extension</h2>\n" +
-    "        <p>\n" +
-    "            The beta release is now available! Install it via the Chrome Web Store:\n" +
-    "            <a href=\"https://chrome.google.com/webstore/detail/getthepdf/iplffkdpngmdjhlpjmppncnlhomiipha\">\n" +
-    "                un\n" +
-    "            </a>\n" +
-    "        </p>\n" +
-    "\n" +
-    "\n" +
-    "        <h2>Bookmarklet <span class=\"beta\">beta</span> </h2>\n" +
-    "        <p>\n" +
-    "            Drag the link up to your bookmarks toolbar. When you're viewing an article\n" +
-    "            landing page, click the bookmark. If we can find open fulltext for it anywhere,\n" +
-    "            we'll redirect you there.\n" +
-    "        </p>\n" +
-    "        <p>\n" +
-    "            <span class=\"instructions\">\n" +
-    "                Drag this link to your bookmarks toolbar:\n" +
-    "            </span>\n" +
-    "            <a class=\"bookmarklet-link\" href=\"javascript:(function () {var jsCode = document.createElement('script'); jsCode.setAttribute('src', '//oadoi.org/browser-tools/bookmarklet.js');document.body.appendChild(jsCode);  }());\">oaDOI it</a>\n" +
-    "        </p>\n" +
-    "\n" +
-    "\n" +
-    "        <p>\n" +
-    "            The tool is in beta right now, so we're really interested in your feedback.\n" +
-    "            <a href=\"mailto:team@impactstory.org\">Drop us a line</a> with bug reports\n" +
-    "            and feature ideas!\n" +
-    "        </p>\n" +
-    "\n" +
-    "    -->\n" +
-    "\n" +
-    "</div>\n" +
-    "");
+    "</div>");
 }]);
 
 angular.module("landing.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("landing.tpl.html",
     "<div class=\"page landing\">\n" +
-    "    <div class=\"top-screen\" layout=\"row\" layout-align=\"center center\">\n" +
+    "    <div class=\"top-screen\">\n" +
     "        <div class=\"content\">\n" +
     "            <div class=\"main-banner\">\n" +
     "                <div class=\"tagline\">\n" +
     "                    <span class=\"number\">{{ d.numServed }}</span>\n" +
-    "                    <span class=\"text\">fulltext articles served.</span>\n" +
+    "                    <span class=\"text\">fulltext requests served.</span>\n" +
     "                </div>\n" +
     "                <div class=\"subtagline\">\n" +
-    "                    Search our database of over 100 million scholarly resources\n" +
-    "                    and find free fulltext from open-access repositories worldwide.\n" +
+    "                    Use our database of over 100 million scholarly resources\n" +
+    "                    to find free fulltext from open-access repositories worldwide.\n" +
+    "                </div>\n" +
+    "                <div class=\"more\" ng-click=\"scrollToMore()\" id=\"show-rest-of-landing-page\">\n" +
+    "                    <i class=\"fa fa-chevron-down\"></i>\n" +
+    "                    more\n" +
     "                </div>\n" +
     "            </div>\n" +
-    "            <div class=\"products\">\n" +
+    "\n" +
+    "\n" +
+    "            <div class=\"products\" id=\"products-section\">\n" +
     "                <div class=\"product unpaywall\">\n" +
     "                    <div class=\"text\">\n" +
     "                        <h2>\n" +
@@ -272,7 +293,7 @@ angular.module("landing.tpl.html", []).run(["$templateCache", function($template
     "                            500 new users every day.\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"cta\">Install it now</div>\n" +
+    "                    <a class=\"cta\" href=\"/unpaywall\">Learn more</a>\n" +
     "                </div>\n" +
     "                <div class=\"product sfx\">\n" +
     "                    <div class=\"text\">\n" +
@@ -285,7 +306,7 @@ angular.module("landing.tpl.html", []).run(["$templateCache", function($template
     "                            to your library's holdings. Used by 600 libraries worldwide.\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"cta\">Learn more</div>\n" +
+    "                    <a class=\"cta\" href=\"/sfx\">Learn more</a>\n" +
     "                </div>\n" +
     "                <div class=\"product api\">\n" +
     "                    <div class=\"text\">\n" +
@@ -298,19 +319,23 @@ angular.module("landing.tpl.html", []).run(["$templateCache", function($template
     "                            our free, open, and scalable REST API.\n" +
     "                        </div>\n" +
     "                    </div>\n" +
-    "                    <div class=\"cta\">Read the docs</div>\n" +
+    "                    <a class=\"cta\" href=\"/api\">Learn more</a>\n" +
     "                </div>\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "            </div>\n" +
     "\n" +
-    "\n" +
     "        </div>\n" +
+    "\n" +
     "    </div>\n" +
     "\n" +
     "</div>\n" +
+    "\n" +
     "");
+}]);
+
+angular.module("sfx.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("sfx.tpl.html",
+    "<h1>SFXY!</h1>");
 }]);
 
 angular.module("team.tpl.html", []).run(["$templateCache", function($templateCache) {
@@ -342,4 +367,9 @@ angular.module("team.tpl.html", []).run(["$templateCache", function($templateCac
     "    </p>\n" +
     "</div>\n" +
     "");
+}]);
+
+angular.module("unpaywall.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("unpaywall.tpl.html",
+    "<h1>unpaywall!</h1>");
 }]);

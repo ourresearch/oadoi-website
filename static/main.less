@@ -1,10 +1,19 @@
 @import "animate.css";
 
 @mobile: ~"only screen and (max-width: 415px)";
+@gtMobile: ~"only screen and (min-width: 768px)";
+
+
 @desktop: ~"only screen and (min-width: 1280px)";
 
 @primaryColor: #ff4000;
 @navBarHeight: 100px;
+
+
+
+@sfx: #3F51B5;
+@unpaywall: #00C853;
+@api: #E91E63;
 
 body {
   a {
@@ -40,7 +49,7 @@ body {
     padding: 2px 5px;
     border-radius: 3px;
     border: 1px solid #ddd;
-    font-size: 16px;
+    font-size: 80%;
   }
   pre {
     &.wrap {
@@ -55,30 +64,22 @@ body {
 
 
   .nav {
-    padding: 0 20px;
-    @media @mobile {
-      padding: 0 5px;
-    }
+    background: #fff;
     display: flex;
     align-items: center;
-    height: @navBarHeight;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    @media @mobile {
-      height: @navBarHeight - 20px;
-    }
+    padding: 10px 5px;
+    z-index: 9;
+    border-bottom: 1px solid #eee;
     a.main-logo {
-      dispay: block;
-      margin-left: 20px;
-      @media @mobile {
-        margin: 0 0 0 10px;
-      }
+      margin: 0 0 0 10px;
       img {
-        width: 80px;
-        @media @mobile {
-          width: 60px;
+        width: 50px;
+        @media @gtMobile{
+          width: 80px;
         }
       }
     }
@@ -89,16 +90,21 @@ body {
       display: flex;
       height: 100%;
       align-items: flex-start;
-      @media @mobile {
-        align-items: center;
-      }
+      //@media @mobile {
+      //  align-items: center;
+      //}
       a {
-        display: block;
         color: #999;
-        padding: 20px;
-        @media @mobile {
-          font-size: 16px;
-          padding: 10px;
+        font-size: 16px;
+        padding: 10px 15px;
+        display: none;
+        @media @gtMobile {
+          font-size: 18px;
+          display: block;
+          i {display: none;}
+        }
+        &.faq {
+          display: block;
         }
 
       }
@@ -110,69 +116,171 @@ body {
   .page {
     max-width: 660px;
     margin: 0 auto;
-    padding: 0 0 200px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    h1 {
+      font-weight: 300;
+    }
+    h2 {
+      font-weight: 300;
+      margin-top: 50px;
+    }
 
     &.landing {
       max-width: 1100px;
+      padding: 0;
       .top-screen {
-        height: 100vh;
+        //height: 100vh;
+
         .content {
+          @media @gtMobile {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+          }
           .main-banner {
-            margin-bottom: 7vh;
+            flex: 1;
             text-align: center;
+            height: 100vh;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            font-size: 16px;
+            @media @gtMobile {
+              font-size: 22px;
+              margin-top: 10vh;
+            }
+
+
             .tagline {
-              font-size: 55px;
+              font-size: 200%;
               font-weight: 300;
               line-height: 1;
+              margin-bottom: 10px;
             }
             .subtagline {
-              font-size: 22px;
               margin: 10px auto 0;
               text-align: center;
               line-height: 1.3;
               max-width: 650px;
             }
+
+            .more {
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              width: 100px;
+              margin-left: -50px;
+              padding: 10px 0;
+              font-size: 14px;
+              @media @gtMobile {
+                display: none;
+              }
+            }
+
           }
           .products {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            @media @desktop {
-              width: 1000px;
+
+            // top margin needed on mobile because otherwise when you click
+            // the "more" button it scrolls to a place where the navbar
+            // hides the content.
+            margin-top: 60px;
+            @media @gtMobile {
+              margin-top: 0;
             }
             .product {
-              width: 250px;
+              margin: 0 10px 40px 0;
+              @media @gtMobile {
+                flex: 1;
+                margin: 0 20px 60px;
+              }
+              //width: 250px;
               display: flex;
               flex-direction: column;
               justify-content: space-between;
+              font-size: 18px;
+              text-align: left;
+              line-height: 1.3;
+
+              padding: 20px 15px;
+              border-radius: 3px;
+              box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
+
               h2 {
                 font-weight: 300;
-                text-align: center;
-                margin-left: -10px;
+                text-align: left;
+                margin: 0 0 10px 0;
+                //border-bottom: 1px solid #333;
               }
+
+
+              //&.unpaywall {
+              //  color: @unpaywall;
+              //  h2 {border-color: @unpaywall;}
+              //  a.cta {
+              //    color: @unpaywall;
+              //    border-color: @unpaywall;
+              //  }
+              //}
+              //&.sfx {
+              //  color: @sfx;
+              //  h2 {border-color: @sfx;}
+              //  a.cta {
+              //    color: @sfx;
+              //    border-color: @sfx;
+              //  }
+              //}
+              //
+              //&.api {
+              //  color: @api;
+              //  h2 {border-color: @api;}
+              //  a.cta {
+              //    color: @api;
+              //    border-color: @api;
+              //  }
+              //}
+
+
+
               .about {
 
               }
-              .cta {
+              a.cta {
                 cursor: pointer;
-                font-size: 20px;
-                padding: 10px 20px;
-                margin: 20px;
+
                 border-radius: 3px;
-                border: 3px solid #333;
                 text-align: center;
+
+                margin: 20px auto 0 10px;
+                border: 1px solid #333;
+                padding: 7px 10px;
+                font-size: 85%;
+
+                //border-color: @primaryColor;
+                color: #333;
 
 
                 transition: all 0.15s ease;
                 &:hover {
                   transform: scale(1.03125);
+                  text-decoration: none;
                 }
+
+
+
 
                 //@media @xs {
                 //  padding: 14px 20px;
                 //  font-size: 16px;
                 //}
               }
+
             }
           }
         }
@@ -180,15 +288,19 @@ body {
     }
 
 
+    
+    // other pages besides the landing page.
 
 
     &.api {
       h3 {
       }
       div.endpoint {
-        padding: 0 0 50px;
         code.endpoint {
-          padding: 7px 15px;
+          padding: 1px 5px;
+          border: none;
+          color: #fff;
+          background: #333;
         }
       }
 
@@ -199,27 +311,40 @@ body {
           //margin-top: -20px;
         }
       }
+      ul.response-details {
+        line-height: 1.5;
+      }
     }
 
-    &.browser-tools {
-      .beta {
-        font-size: 50%;
-        //padding: 0 10px;
-        border-radius: 3px;
-        //border: 1px solid @primaryColor;
-      }
-      .bookmarklet-link {
-        background: @primaryColor;
-        color: #fff;
-        padding: 0 10px;
-        border-radius: 3px;
-        font-size: 120%;
-      }
-    }
 
 
   }
+}
 
+.page-footer {
+  display:flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  color: #555;
+  border-top: 1px solid #eee;
+  .links {
+    a {
+      color: #555;
+      padding: 7px 7px;
+      font-size: 22px;
+      .text {
+        display: none;
+      }
 
+    }
 
+  }
+  .spacer {
+    width: 50px;
+  }
+  .by {
+    //i {font-size: 80%;}
+    font-size: 14px;
+    max-width: 35%;
+  }
 }

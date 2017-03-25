@@ -114,9 +114,13 @@ angular.module('app').controller('AppCtrl', function(
 
 
     $rootScope.$on('$routeChangeSuccess', function(next, current){
-        $scope.global.template = current.loadedTemplateUrl
-            .replace("/", "-")
-            .replace(".tpl.html", "")
+        if (current.loadedTemplateUrl) {
+            $scope.global.template = current.loadedTemplateUrl
+                .replace("/", "-")
+                .replace(".tpl.html", "")
+        }
+
+
         $scope.global.title = null
     })
 

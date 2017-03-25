@@ -1,6 +1,7 @@
 angular.module('landing', [
     'ngRoute',
-    'ngMessages'
+    'ngMessages',
+    'duScroll'
 ])
 
     .config(function ($routeProvider) {
@@ -20,6 +21,8 @@ angular.module('landing', [
     .controller("LandingPageCtrl", function ($scope,
                                              $http,
                                              $rootScope,
+                                             $location,
+                                             $document,
                                              $interval,
                                              $timeout) {
 
@@ -28,7 +31,7 @@ angular.module('landing', [
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        var oneServedEvery = 2000;  // one served every 2000 ms
+        var oneServedEvery = 604;  // one served every 2000 ms
         var startTimestampMs = 1485907200 * 1000;  // feb 1 2017
         var elapsedMs = Date.now() - startTimestampMs;
         var numServed = Math.floor(elapsedMs / oneServedEvery);
@@ -37,12 +40,39 @@ angular.module('landing', [
         $scope.d = {}
         $scope.d.numServed = numberWithCommas(numServed)
 
-
-        $interval(function(){
+        function tick(){
+            var fuzz = Math.random() + .5;
+            var waitFor = oneServedEvery * fuzz
             numServed += 1
             $scope.d.numServed = numberWithCommas(numServed)
             console.log("tick")
-        }, oneServedEvery)
+
+            if ($location.pathname){
+                return false
+            }
+            else {
+                return $timeout(tick, waitFor)
+            }
+
+        }
+
+        //tick()
+
+
+        var moreSection = angular.element(document.getElementById('show-rest-of-landing-page'));
+
+        $scope.scrollToMore = function(){
+            console.log("scroll to about!", moreSection)
+            $document.scrollToElement(moreSection, 0, 1000);
+        }
+
+
+        //$interval(function(){
+        //    numServed += 1
+        //    $scope.d.numServed = numberWithCommas(numServed)
+        //    console.log("tick")
+        //}, oneServedEvery)
+
 
 
 
