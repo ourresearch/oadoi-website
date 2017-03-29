@@ -660,71 +660,43 @@ angular.module("footer.tpl.html", []).run(["$templateCache", function($templateC
 angular.module("landing.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("landing.tpl.html",
     "<div class=\"page landing\">\n" +
-    "    <div class=\"top-screen\">\n" +
-    "        <div class=\"content\">\n" +
-    "            <div class=\"main-banner\">\n" +
-    "                <div class=\"tagline\">\n" +
-    "                    <span class=\"number\">{{ d.numServed }}</span>\n" +
-    "                    <span class=\"text\">fulltext requests served.</span>\n" +
-    "                </div>\n" +
-    "                <div class=\"subtagline\">\n" +
-    "                    Use our database of over 100 million scholarly resources\n" +
-    "                    to find free fulltext from open-access repositories worldwide.\n" +
-    "                </div>\n" +
-    "                <div class=\"more\" ng-click=\"scrollToMore()\" id=\"show-rest-of-landing-page\">\n" +
-    "                    <i class=\"fa fa-chevron-down\"></i>\n" +
-    "                    more\n" +
-    "                </div>\n" +
+    "    <div class=\"content\">\n" +
+    "        <div class=\"main-banner\">\n" +
+    "            <div class=\"tagline\">\n" +
+    "                <span class=\"number\">{{ d.numServed }}</span>\n" +
+    "                <span class=\"text\">fulltext requests served.</span>\n" +
     "            </div>\n" +
-    "\n" +
-    "\n" +
-    "            <div class=\"products\" id=\"products-section\">\n" +
-    "                <div class=\"product unpaywall\">\n" +
-    "                    <div class=\"text\">\n" +
-    "                        <h2>\n" +
-    "                            <i class=\"fa fa-user\"></i>\n" +
-    "                            Everyone\n" +
-    "                        </h2>\n" +
-    "                        <div class=\"about\">\n" +
-    "                            The Unpaywall browser extension\n" +
-    "                            bypasses paywalls as you browse. Installed by\n" +
-    "                            500 new users every day.\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <a class=\"cta\" href=\"/unpaywall\">Learn more</a>\n" +
-    "                </div>\n" +
-    "                <div class=\"product sfx\">\n" +
-    "                    <div class=\"text\">\n" +
-    "                        <h2>\n" +
-    "                            <i class=\"fa fa-university\"></i>\n" +
-    "                            Libraries\n" +
-    "                        </h2>\n" +
-    "                        <div class=\"about\">\n" +
-    "                            Our SFX integration adds millions of open-access articles\n" +
-    "                            to your library's holdings. Used by 600 libraries worldwide.\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <a class=\"cta\" href=\"/sfx\">Learn more</a>\n" +
-    "                </div>\n" +
-    "                <div class=\"product api\">\n" +
-    "                    <div class=\"text\">\n" +
-    "                        <h2>\n" +
-    "                            <i class=\"fa fa-cogs\"></i>\n" +
-    "                            Developers\n" +
-    "                        </h2>\n" +
-    "                        <div class=\"about\">\n" +
-    "                            Build your own apps or do research using\n" +
-    "                            our free, open, and scalable REST API.\n" +
-    "                        </div>\n" +
-    "                    </div>\n" +
-    "                    <a class=\"cta\" href=\"/api\">Learn more</a>\n" +
-    "                </div>\n" +
-    "\n" +
+    "            <div class=\"subtagline\">\n" +
+    "                oaDOI is a comprehensive index of fulltext options for 90 million scholarly articles,\n" +
+    "                accessible with a free, fast, open API.\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
     "\n" +
+    "        <div class=\"info\">\n" +
+    "            <p>\n" +
+    "                Our API powers\n" +
+    "                <a href=\"http://unpaywall.org\">Unpaywall,</a> a free browser extension that lets you\n" +
+    "                bypass paywalls on scholarly articles.\n" +
+    "            </p>\n" +
+    "\n" +
+    "            <p>\n" +
+    "                For libraries, we support an <a href=\"http://blog.impactstory.org/oadoi-in-sfx/\">SFX integration</a>\n" +
+    "                that finds open fulltext when there's\n" +
+    "                no subscription access; more than 600 libraries use it worldwide.\n" +
+    "            </p>\n" +
+    "\n" +
+    "            <p>\n" +
+    "                Want to build your own cool project on our data? Awesome. Check out the\n" +
+    "                <a href=\"/api\">API documentation.</a>\n" +
+    "            </p>\n" +
+    "        </div>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "    </div>\n" +
+    "\n" +
     "\n" +
     "</div>\n" +
     "\n" +

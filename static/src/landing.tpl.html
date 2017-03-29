@@ -1,69 +1,41 @@
 <div class="page landing">
-    <div class="top-screen">
-        <div class="content">
-            <div class="main-banner">
-                <div class="tagline">
-                    <span class="number">{{ d.numServed }}</span>
-                    <span class="text">fulltext requests served.</span>
-                </div>
-                <div class="subtagline">
-                    Use our database of over 100 million scholarly resources
-                    to find free fulltext from open-access repositories worldwide.
-                </div>
-                <div class="more" ng-click="scrollToMore()" id="show-rest-of-landing-page">
-                    <i class="fa fa-chevron-down"></i>
-                    more
-                </div>
+    <div class="content">
+        <div class="main-banner">
+            <div class="tagline">
+                <span class="number">{{ d.numServed }}</span>
+                <span class="text">fulltext requests served.</span>
             </div>
-
-
-            <div class="products" id="products-section">
-                <div class="product unpaywall">
-                    <div class="text">
-                        <h2>
-                            <i class="fa fa-user"></i>
-                            Everyone
-                        </h2>
-                        <div class="about">
-                            The Unpaywall browser extension
-                            bypasses paywalls as you browse. Installed by
-                            500 new users every day.
-                        </div>
-                    </div>
-                    <a class="cta" href="/unpaywall">Learn more</a>
-                </div>
-                <div class="product sfx">
-                    <div class="text">
-                        <h2>
-                            <i class="fa fa-university"></i>
-                            Libraries
-                        </h2>
-                        <div class="about">
-                            Our SFX integration adds millions of open-access articles
-                            to your library's holdings. Used by 600 libraries worldwide.
-                        </div>
-                    </div>
-                    <a class="cta" href="/sfx">Learn more</a>
-                </div>
-                <div class="product api">
-                    <div class="text">
-                        <h2>
-                            <i class="fa fa-cogs"></i>
-                            Developers
-                        </h2>
-                        <div class="about">
-                            Build your own apps or do research using
-                            our free, open, and scalable REST API.
-                        </div>
-                    </div>
-                    <a class="cta" href="/api">Learn more</a>
-                </div>
-
+            <div class="subtagline">
+                oaDOI is a comprehensive index of fulltext options for 90 million scholarly articles,
+                accessible with a free, fast, open API.
             </div>
 
         </div>
 
+        <div class="info">
+            <p>
+                Our API powers
+                <a href="http://unpaywall.org">Unpaywall,</a> a free browser extension that lets you
+                bypass paywalls on scholarly articles.
+            </p>
+
+            <p>
+                For libraries, we support an <a href="http://blog.impactstory.org/oadoi-in-sfx/">SFX integration</a>
+                that finds open fulltext when there's
+                no subscription access; more than 600 libraries use it worldwide.
+            </p>
+
+            <p>
+                Want to build your own cool project on our data? Awesome. Check out the
+                <a href="/api">API documentation.</a>
+            </p>
+        </div>
+
+
+
+
     </div>
+
 
 </div>
 
