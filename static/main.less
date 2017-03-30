@@ -26,7 +26,7 @@ body {
 
   background: #fff;
   line-height: 1.3;
-  font-size: 16px;
+  font-size: 18px;
   //@media @gtMobile {
   //  font-size: 18px;
   //}
@@ -60,6 +60,7 @@ body {
     border-radius: 3px;
     border: 1px solid #ddd;
     font-size: 80%;
+    white-space: nowrap;
   }
   pre {
     &.wrap {
@@ -129,7 +130,7 @@ body {
     max-width: 725px;
     margin: 0 auto;
     padding-top: 100px;
-    padding-bottom: 50px;
+    padding-bottom: 100px;
     h1 {
       font-weight: 300;
     }
@@ -198,6 +199,23 @@ body {
     }
 
 
+    &.faq {
+      h1 {
+        margin-bottom: -20px;
+      }
+      dl {
+        dt {
+          font-weight: bold;
+          padding-top: 80px;
+        }
+        dd {
+          position: relative;
+          margin-left: 0;
+        }
+      }
+    }
+
+
 
   }
 }
@@ -215,6 +233,9 @@ body {
       font-size: 22px;
       .text {
         display: none;
+      }
+      &:hover {
+        text-decoration: none;
       }
 
     }

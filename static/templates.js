@@ -7,11 +7,15 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "    <p>\n" +
     "        Our REST API allows programmatic access to oaDOI's data. It's free and open for anyone to use.\n" +
     "        There's no rate limit, although if you need more than 100k calls/day you\n" +
-    "        may want to use our data dump instead.\n" +
+    "        may want to use our\n" +
+    "        <a href=\"#dataset\">data dump</a>\n" +
+    "        instead.\n" +
     "    </p>\n" +
     "    <p>\n" +
-    "        Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something\n" +
-    "        breaks, and so we can report usage to our funders.\n" +
+    "        Requests must include your email, so that we can\n" +
+    "        get in touch if something breaks, and so we can report usage to our funders.\n" +
+    "        Add the email as a parameter at the end of the URL, like this:\n" +
+    "        <code>?email=YOUR_EMAIL</code>.\n" +
     "    </p>\n" +
     "\n" +
     "\n" +
@@ -26,7 +30,7 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "            gets information about the API.\n" +
     "            Returns a status object with version number. Try it here:\n" +
-    "             <a href=\"https://api.oadoi.org\">https://api.oadoi.org</a>\n" +
+    "             <a href=\"https://api.oadoi.org\">https://api.oadoi.org?email=test@example.com</a>\n" +
     "        </p>\n" +
     "\n" +
     "    </div>\n" +
@@ -36,7 +40,7 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        <p>\n" +
     "        <code class=\"endpoint\">GET /:doi</code>\n" +
     "            gets data about a single DOI.  Try this example:\n" +
-    "            <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373</a>\n" +
+    "            <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>\n" +
     "        </p>\n" +
     "    </div>\n" +
     "\n" +
@@ -173,61 +177,87 @@ angular.module("browser-tools.tpl.html", []).run(["$templateCache", function($te
 
 angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("faq.tpl.html",
-    "<div class=\"page about\">\n" +
-    "    <h1>About</h1>\n" +
-    "    <p>\n" +
-    "        An oaDOI link is like a DOI, with a useful difference: if there's an open access version\n" +
-    "        of the article, the oaDOI URL will send you there, instead of the paywalled article\n" +
-    "        landing page. So for instance,\n" +
+    "<div class=\"page faq\">\n" +
+    "    <h1>Frequently asked questions</h1>\n" +
     "\n" +
-    "    </p>\n" +
-    "    <ul>\n" +
-    "        <li>This DOI links you a paywall page <a href=\"http://doi.org/10.1038/nature12373\"><strong>doi.org</strong>/10.1038/nature12373</a>,</li>\n" +
-    "        <li>but this oaDOI link gets you a PDF <a href=\"http://oadoi.org/10.1038/nature12373\"><strong>oadoi.org</strong>/10.1038/nature12373</a></li>\n" +
-    "    </ul>\n" +
-    "    <p>The oaDOI system was inspired by <a href=\"http://doai.io/\">DOAI.</a> It improves\n" +
-    "        on their coverage, and offers\n" +
-    "        <a href=\"/api\">an API</a> with license information and other details. It's in\n" +
-    "        <a href=\"https://github.com/Impactstory/oadoi\">active development</a> by the\n" +
+    "    <dl>\n" +
+    "\n" +
+    "        <dt id=\"data-sources\">Where does your data come from?</dt>\n" +
+    "        <dd>\n" +
+    "            We use a number of different data sources to find open versions of articles\n" +
+    "            (or in many cases, to determine that the articles are open already):\n" +
+    "            <ul>\n" +
+    "                <li>The <a href=\"https://doaj.org/\">Directory of Open Access Journals</a> to see if it’s in their index of OA journals.</li>\n" +
+    "                <li><a href=\"http://crossref.org/\">CrossRef’s</a> license metadata field, to see if the publisher has reported an open license.</li>\n" +
+    "                <li>Our own custom list DOI prefixes, to see if it's in a known preprint repository.</li>\n" +
+    "                <li><a href=\"http://datacite.org/\">DataCite</a>, to see if it’s an open dataset.</li>\n" +
+    "                <li>The wonderful <a href=\"https://www.base-search.net/\">BASE OA search engine</a> to see if there’s a Green OA copy of the article.\n" +
+    "                BASE indexes 90mil+ open documents in 4000+ repositories by harvesting OAI-PMH metadata.</li>\n" +
+    "                <li>Repository pages directly, in cases where BASE was unable to determine openness.</li>\n" +
+    "                <li>Journal article pages directly, to see if there’s a free PDF link (this is great for detecting hybrid OA)</li>\n" +
+    "            </ul>\n" +
+    "        </dd>\n" +
     "\n" +
     "\n" +
-    "        <a href=\"/team\">Impactstory team.</a>\n" +
-    "        \n" +
-    "        <p>\n" +
+    "        <dt id=\"creators\">Who is behind oaDOI?</dt>\n" +
+    "        <dd>\n" +
+    "            We're <a href=\"http://impactstory.org/about\">Impactstory,</a>\n" +
+    "            a nonprofit working to make science more open and reusable online.\n" +
     "\n" +
-    "    <h2 id=\"data-source\">Data Sources</h2>\n" +
-    "    <div>\n" +
-    "        We look for open copies of articles using the following data sources:\n" +
-    "        <ul>\n" +
-    "            <li>The <a href=\"https://doaj.org/\">Directory of Open Access Journals</a> to see if it’s in their index of OA journals.</li>\n" +
-    "            <li><a href=\"http://crossref.org/\">CrossRef’s</a> license metadata field, to see if the publisher has reported an open license.</li>\n" +
-    "            <li>Our own custom list DOI prefixes, to see if it's in a known preprint repository.</li>\n" +
-    "            <li><a href=\"http://datacite.org/\">DataCite</a>, to see if it’s an open dataset.</li>\n" +
-    "            <li>The wonderful <a href=\"https://www.base-search.net/\">BASE OA search engine</a> to see if there’s a Green OA copy of the article.\n" +
-    "            BASE indexes 90mil+ open documents in 4000+ repositories by harvesting OAI-PMH metadata.</li>\n" +
-    "            <li>Repository pages directly, in cases where BASE was unable to determine openness.</li>\n" +
-    "            <li>Journal article pages directly, to see if there’s a free PDF link (this is great for detecting hybrid OA)</li>\n" +
-    "        </ul>\n" +
-    "    </div>\n" +
+    "        </dd>\n" +
     "\n" +
-    "    <h2 id=\"errors\">Fixing errors</h2>\n" +
-    "    <div class=\"section\">\n" +
-    "        <p>\n" +
-    "            We make a lot of errors. First of all, some open repositories are not yet\n" +
+    "        <dt id=\"funding\">How is oaDOI funded?</dt>\n" +
+    "        <dd>\n" +
+    "            Impactstory is supported by grants from <span class=\"funders\">\n" +
+    "            the National Science Foundation and the Alfred P. Sloan Foundation.</span> We'll be supporting\n" +
+    "            oaDOI as spinoff of existing projects for the next year, but we're looking for additional funding to expand the\n" +
+    "            service even further. Possible models include grants and Service-Level Agreements with\n" +
+    "            data users. No matter what funding models we end up with, the API will always remain free and open.\n" +
+    "        </dd>\n" +
+    "\n" +
+    "        <dt id=\"different-results-from-unpaywall\">Why does the Unpaywall extension sometimes give different results from oaDOI?</dt>\n" +
+    "        <dd>\n" +
+    "            Our Unpaywall browser extension uses oaDOI to find fulltext whenever you run into paywalled articles.\n" +
+    "            It supplements oaDOI with other data sources, too; for instance,\n" +
+    "            Unpaywall tries to parse and understand scholarly article pages\n" +
+    "            as you view them. Consequently,\n" +
+    "             Unpaywall's results are a bit more comprehensive than what you'd get by calling oaDOI directly.\n" +
+    "        </dd>\n" +
+    "\n" +
+    "        <dt id=\"report-bugs\">I found a bug</dt>\n" +
+    "        <dd>\n" +
+    "            Sorry about that! The problem may be that a given repository is not yet\n" +
     "            <a href=\"https://www.base-search.net/about/en/about_sources_date.php?menu=2&submenu=1\">indexed by BASE</a>\n" +
-    "            (which is where most of our Green OA information comes from). Then typos,\n" +
-    "            dead links, and inconsistent formatting add up to create lots more chances to mix up\n" +
-    "            connections between fulltext and DOIs.\n" +
+    "            (which is where most of our Green OA information comes from). Then there's also typos,\n" +
+    "            dead links,  inconsistent formatting, and other gotchas.\n" +
     "            The good news is, we're getting better all the\n" +
-    "            time, and your feedback helps.\n" +
-    "        </p>\n" +
-    "        <p>\n" +
-    "            When you find errors, please let us know by\n" +
+    "            time, and your feedback helps. When you find errors, please let us know by\n" +
     "            <a href=\"https://goo.gl/forms/kFZUUZUeM9ze9uXr2\" target=\"_blank\" >completing this form.</a>\n" +
     "             From there it'll go in our bug\n" +
     "            queue. We'll drop you a line when it's fixed.\n" +
-    "        </p>\n" +
-    "    </div>\n" +
+    "        </dd>\n" +
+    "\n" +
+    "\n" +
+    "        <dt id=\"why\">Why did you make oaDOI?</dt>\n" +
+    "        <dd>\n" +
+    "            Stay tuned, we're still working on writing the answer to this question.\n" +
+    "        </dd>\n" +
+    "\n" +
+    "        <dt id=\"similar-projects\">What are some similar projects?</dt>\n" +
+    "        <dd>\n" +
+    "            Stay tuned, we're still working on writing the answer to this question.\n" +
+    "        </dd>\n" +
+    "    </dl>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
     "\n" +
     "\n" +
     "</div>\n" +
@@ -239,7 +269,7 @@ angular.module("footer.tpl.html", []).run(["$templateCache", function($templateC
     "<div class=\"page-footer\">\n" +
     "    <div class=\"by\">\n" +
     "        Made with <i class=\"fa fa-heart-o\"></i> by\n" +
-    "        <a href=\"/faq#who-is-behind-this\">Impactstory.</a>\n" +
+    "        <a href=\"http://impactstory.org/about\">Impactstory.</a>\n" +
     "    </div>\n" +
     "    <div class=\"spacer\"></div>\n" +
     "    <div class=\"links\">\n" +
@@ -247,11 +277,11 @@ angular.module("footer.tpl.html", []).run(["$templateCache", function($templateC
     "            <i class=\"fa fa-envelope-o\"></i>\n" +
     "            <span class=\"text\">email</span>\n" +
     "        </a>\n" +
-    "        <a href=\"http://twitter.com/unpaywall\">\n" +
+    "        <a href=\"http://twitter.com/oadoi_org\">\n" +
     "            <i class=\"fa fa-twitter\"></i>\n" +
     "            <span class=\"text\">twitter</span>\n" +
     "        </a>\n" +
-    "        <a href=\"https://github.com/Impactstory/unpaywall\">\n" +
+    "        <a href=\"https://github.com/Impactstory/oadoi\">\n" +
     "            <i class=\"fa fa-github\"></i>\n" +
     "            <span class=\"text\">github</span>\n" +
     "        </a>\n" +
@@ -265,21 +295,21 @@ angular.module("landing.tpl.html", []).run(["$templateCache", function($template
     "    <div class=\"content\">\n" +
     "        <div class=\"main-banner\">\n" +
     "            <div class=\"tagline\">\n" +
-    "                <span class=\"number\">{{ d.numServed }}</span>\n" +
-    "                <span class=\"text\">fulltext requests served.</span>\n" +
+    "                Find fulltext for scholarly articles.\n" +
+    "\n" +
     "            </div>\n" +
     "            <div class=\"subtagline\">\n" +
-    "                oaDOI is a comprehensive index of fulltext options for 90 million scholarly articles,\n" +
-    "                accessible with a free, fast, open API.\n" +
+    "                We index 90 million articles and deliver open-access\n" +
+    "                fulltext versions over a free, fast, open API.\n" +
     "            </div>\n" +
     "\n" +
     "        </div>\n" +
     "\n" +
     "        <div class=\"info\">\n" +
     "            <p>\n" +
-    "                Our API powers\n" +
+    "                Our data powers\n" +
     "                <a href=\"http://unpaywall.org\">Unpaywall,</a> a free browser extension that lets you\n" +
-    "                bypass paywalls on scholarly articles.\n" +
+    "                bypass paywalls on scholarly articles. <a href=\"http://unpaywall.org\">Give it a try.</a>\n" +
     "            </p>\n" +
     "\n" +
     "            <p>\n" +
@@ -289,7 +319,8 @@ angular.module("landing.tpl.html", []).run(["$templateCache", function($template
     "            </p>\n" +
     "\n" +
     "            <p>\n" +
-    "                Want to build your own cool project on our data? Awesome. Check out the\n" +
+    "                Want to build on our data? Awesome! We handle a million calls a\n" +
+    "                week and we'd love to add yours. Check out the\n" +
     "                <a href=\"/api\">API documentation.</a>\n" +
     "            </p>\n" +
     "        </div>\n" +

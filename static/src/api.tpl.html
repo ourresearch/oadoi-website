@@ -3,11 +3,15 @@
     <p>
         Our REST API allows programmatic access to oaDOI's data. It's free and open for anyone to use.
         There's no rate limit, although if you need more than 100k calls/day you
-        may want to use our data dump instead.
+        may want to use our
+        <a href="#dataset">data dump</a>
+        instead.
     </p>
     <p>
-        Please send <code>?email=YOUREMAIL</code> in your requests so we can get in touch if something
-        breaks, and so we can report usage to our funders.
+        Requests must include your email, so that we can
+        get in touch if something breaks, and so we can report usage to our funders.
+        Add the email as a parameter at the end of the URL, like this:
+        <code>?email=YOUR_EMAIL</code>.
     </p>
 
 
@@ -22,7 +26,7 @@
 
             gets information about the API.
             Returns a status object with version number. Try it here:
-             <a href="https://api.oadoi.org">https://api.oadoi.org</a>
+             <a href="https://api.oadoi.org">https://api.oadoi.org?email=test@example.com</a>
         </p>
 
     </div>
@@ -32,7 +36,7 @@
         <p>
         <code class="endpoint">GET /:doi</code>
             gets data about a single DOI.  Try this example:
-            <a href="https://api.oadoi.org/10.1038/nature12373">https://api.oadoi.org/10.1038/nature12373</a>
+            <a href="https://api.oadoi.org/10.1038/nature12373">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>
         </p>
     </div>
 
