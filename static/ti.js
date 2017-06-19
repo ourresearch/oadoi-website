@@ -508,11 +508,10 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        </li>\n" +
     "    </ul>\n" +
     "\n" +
-    "    <h2 id=\"dataset\">Download the entire dataset</h2>\n" +
+    "\n" +
+    "    <h2 id=\"dataset\">Download the dataset</h2>\n" +
     "    <p>\n" +
-    "        We're working on releasing the entire oaDOI knowledge base as a downloadable dataset.\n" +
-    "        It should be ready in early April. Until then, feel free to contact us and we can send you\n" +
-    "        whatever we have got so far.\n" +
+    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you are interested in downloading the entire dataset.\n" +
     "    </p>\n" +
     "\n" +
     "</div>\n" +
