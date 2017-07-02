@@ -236,26 +236,7 @@ angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCach
     "            queue. We'll drop you a line when it's fixed.\n" +
     "        </dd>\n" +
     "\n" +
-    "\n" +
-    "        <dt id=\"why\">Why did you make oaDOI?</dt>\n" +
-    "        <dd>\n" +
-    "            Stay tuned, we're still working on writing the answer to this question.\n" +
-    "        </dd>\n" +
-    "\n" +
-    "        <dt id=\"similar-projects\">What are some similar projects?</dt>\n" +
-    "        <dd>\n" +
-    "            Stay tuned, we're still working on writing the answer to this question.\n" +
-    "        </dd>\n" +
     "    </dl>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "\n" +
     "\n" +
     "\n" +
