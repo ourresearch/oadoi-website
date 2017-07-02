@@ -362,6 +362,12 @@ angular.module('staticPages', [
             controller: "StaticPageCtrl"
         })
     })
+    .config(function ($routeProvider) {
+        $routeProvider.when('/sla', {
+            templateUrl: "sla.tpl.html",
+            controller: "StaticPageCtrl"
+        })
+    })
 
     .config(function ($routeProvider) {
         $routeProvider.when('/about', {redirectTo: "/faq"})
@@ -396,15 +402,15 @@ angular.module('staticPages', [
 
 
 
-angular.module('templates.app', ['api.tpl.html', 'browser-tools.tpl.html', 'faq.tpl.html', 'footer.tpl.html', 'landing.tpl.html', 'sfx.tpl.html', 'team.tpl.html', 'unpaywall.tpl.html']);
+angular.module('templates.app', ['api.tpl.html', 'browser-tools.tpl.html', 'faq.tpl.html', 'footer.tpl.html', 'landing.tpl.html', 'sfx.tpl.html', 'sla.tpl.html', 'team.tpl.html', 'unpaywall.tpl.html']);
 
 angular.module("api.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("api.tpl.html",
     "<div class=\"page api\">\n" +
     "    <h1>API</h1>\n" +
     "    <p>\n" +
-    "        Our REST API allows programmatic access to oaDOI's data. It's free and open for anyone to use.\n" +
-    "        There's no rate limit, although if you need more than 100k calls/day you\n" +
+    "        Our REST API gives anyone free, programmatic access to all of oaDOI's data.\n" +
+    "        There's currently no rate limit, although if you need more than 100k calls/day you\n" +
     "        may want to use our\n" +
     "        <a href=\"#dataset\">data dump</a>\n" +
     "        instead.\n" +
@@ -414,6 +420,11 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        get in touch if something breaks, and so we can report usage to our funders.\n" +
     "        Add the email as a parameter at the end of the URL, like this:\n" +
     "        <code>?email=YOUR_EMAIL</code>.\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        If you're using the API, we recommend you subscribe to the\n" +
+    "        <a href=\"https://groups.google.com/forum/#!forum/oadoi-users\">mailing list</a> in order\n" +
+    "        to stay up-to-date when there are changes or new features.\n" +
     "    </p>\n" +
     "\n" +
     "\n" +
@@ -511,7 +522,15 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "    <h2 id=\"dataset\">Download the dataset</h2>\n" +
     "    <p>\n" +
-    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you are interested in downloading the entire dataset.\n" +
+    "        The dataset behind the oaDOI API is available for download as a big CSV file. It's free for use in\n" +
+    "        non-commercial academic research.\n" +
+    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you're interested in downloading it.\n" +
+    "\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        If you'd like to download the dataset for commercial\n" +
+    "        use, check out our\n" +
+    "        <a href=\"sla\">service-level agreement</a> program.\n" +
     "    </p>\n" +
     "\n" +
     "</div>\n" +
@@ -717,6 +736,19 @@ angular.module("landing.tpl.html", []).run(["$templateCache", function($template
 angular.module("sfx.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("sfx.tpl.html",
     "<h1>SFXY!</h1>");
+}]);
+
+angular.module("sla.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("sla.tpl.html",
+    "<div class=\"page sla\">\n" +
+    "    <h1>Service-Level Agreement</h1>\n" +
+    "    <p>\n" +
+    "\n" +
+    "    </p>\n" +
+    "\n" +
+    "\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("team.tpl.html", []).run(["$templateCache", function($templateCache) {

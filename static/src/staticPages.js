@@ -30,6 +30,12 @@ angular.module('staticPages', [
             controller: "StaticPageCtrl"
         })
     })
+    .config(function ($routeProvider) {
+        $routeProvider.when('/sla', {
+            templateUrl: "sla.tpl.html",
+            controller: "StaticPageCtrl"
+        })
+    })
 
     .config(function ($routeProvider) {
         $routeProvider.when('/about', {redirectTo: "/faq"})
