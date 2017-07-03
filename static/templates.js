@@ -339,7 +339,38 @@ angular.module("sla.tpl.html", []).run(["$templateCache", function($templateCach
     "<div class=\"page sla\">\n" +
     "    <h1>Service-Level Agreement</h1>\n" +
     "    <p>\n" +
+    "        If you want to use oaDOI data to build or enhance your commercial\n" +
+    "        service, you may appreciate our Service-Level Agreement (SLA).\n" +
+    "        The exact SLA details will vary depending on your needs and budget, but\n" +
+    "        the key benefits are:\n" +
+    "    </p>\n" +
+    "    <ul>\n" +
+    "        <li>\n" +
+    "            You can download our whole database as a single file, and use it for\n" +
+    "            commercial purposes.\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            You can get weekly updates on what changed in the oaDOI database. So, if you start\n" +
+    "            with the download file, then subscribe to the weekly updates, you'll be able to\n" +
+    "            maintain an exact copy of our database, on your own local servers.\n" +
+    "        </li>\n" +
+    "        <li>\n" +
+    "            You'll get enterprise-level service and support established and guaranteed in writing.\n" +
+    "        </li>\n" +
+    "    </ul>\n" +
     "\n" +
+    "    <p>\n" +
+    "        Of course, if you don't need any of these features and have a moderate call volume\n" +
+    "        (<100k/day), you'll be better served just hitting\n" +
+    "        <a href=\"api\">the API.</a>\n" +
+    "        That's free\n" +
+    "        to everyone for commercial and noncommercial use, and always will be.\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p>\n" +
+    "        Our pricing on the SLA is flexible, depending on your revenue and use-case. So if you think\n" +
+    "        the SLA might be useful, please <a href=\"mailto:team@impactstory.org\">contact us</a>\n" +
+    "        and we'd love to find a solution that works for you.\n" +
     "    </p>\n" +
     "\n" +
     "\n" +
