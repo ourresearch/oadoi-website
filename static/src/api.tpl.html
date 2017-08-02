@@ -1,11 +1,39 @@
 <div class="page api">
-    <h1>API</h1>
+    <h1>API and dataset</h1>
+    
+    <p>
+        There are two ways to get access to the oaDOI dataset: the API is the best bet for most
+        uses because it's simple, fast, and easy to get running; the dataset is great for
+        large-scale research and data mining.
+    </p>
+    <p>
+        Since we're
+        dealing with 90 million articles, it takes a while to run a given version of our OA-detection
+        algorithm across the
+        entire dataset. This means that at any given time there are results from multiple versions
+        of the algorithm
+        co-existing in the database. You can generally ignore this, but for some research
+        uses (including
+        replicating our <a
+            href="https://docs.google.com/document/d/1J9l8rhrT_tMfsw6cqjOnW9GuxBh2b0OYqke1vAWw73g/edit#">recent study</a>),
+        it's important to take into account. For any given DOI, you can check the
+        <code>algorithm_version</code> key to see which algorithm generated the data we're reporting.
+        (in the case of the study, we limited results to ones obtained from version 2 of the algorithm).
+    </p>
+
+    <p>
+        If you're using the API or dataset, we recommend you subscribe to the
+        <a href="https://groups.google.com/forum/#!forum/oadoi-users">mailing list</a> in order
+        to stay up-to-date when there are changes or new features.
+    </p>
+
+
+    <h2>API</h2>
+
     <p>
         Our REST API gives anyone free, programmatic access to all of oaDOI's data.
         There's currently no rate limit, although if you need more than 100k calls/day you
-        may want to use our
-        <a href="#dataset">data dump</a>
-        instead.
+        may want to download the dataset instead.
     </p>
     <p>
         Requests must include your email, so that we can
@@ -13,14 +41,7 @@
         Add the email as a parameter at the end of the URL, like this:
         <code>?email=YOUR_EMAIL</code>.
     </p>
-    <p>
-        If you're using the API, we recommend you subscribe to the
-        <a href="https://groups.google.com/forum/#!forum/oadoi-users">mailing list</a> in order
-        to stay up-to-date when there are changes or new features.
-    </p>
 
-
-    <h2 id="return-format">Endpoints</h2>
     <p>
         The API is very simple, and has just two endpoints. Both are read-only.
     </p>
@@ -46,26 +67,31 @@
     </div>
 
 
+    <h2 id="dataset">Download the dataset</h2>
+    <p>
+        The dataset behind the oaDOI API is available for download as a big CSV file. It's free for use in
+        non-commercial academic research.
+        <a href="mailto:team@impactstory.org">Contact us</a> if you're interested in downloading it.
+
+    </p>
+    <p>
+        If you'd like to download the dataset for commercial
+        use, check out our
+        <a href="sla">service-level agreement</a> program.
+    </p>
+
+
     <h2 id="return-format">Return format</h2>
     <div>
-        Here's an example of what you get back.
+        The labels for data are the same whether you're looking at JSON keys in API, or
+        column names in the dataset. Here are the labels, and some notes describing them.
+        Note that there may also be other experimental keys/columns at any given time, so
+        don't count on the number of keys remaining the same, and don't count on any
+        keys remaining the same, other than the stable ones described below:
     </div>
-    <pre><code class="json">{
-      "doi": "10.1038/nature12873",
-      "doi_resolver": "crossref",
-      "evidence": "oa repository (via base-search.net oa url)",
-      "free_fulltext_url": "https://dash.harvard.edu/bitstream/handle/1/12785839/3944098.pdf?sequence=1",
-      "is_boai_license": false,
-      "is_free_to_read": true,
-      "is_subscription_journal": true,
-      "license": "cc-by-nc",
-      "oa_color": "green",
-      "url": "http://doi.org/10.1038/nature12873"
-    }</code></pre>
 
-    Here are some notes on the response fields. The fields shown are stable, but
-    additional ones may be added over time, so don't count on the number of keys.
     <ul class="response-details">
+        <li><code>algorithm_version</code>: Number. Represents the version of the OA-detection algorithm we used to gather data on this DOI.</li>
         <li><code>doi</code>: the requested DOI</li>
         <li><code>doi_resolver</code>: String. Possible values:
             <ul>
@@ -91,38 +117,5 @@
 
 
 
-    <h2 id="examples">Client libraries and example uses</h2>
-    The API is still new but there are already some great examples of folks using it. Drop us a line
-    if you've got something; we'd love to add you to this list. In no particular order:
-    <ul>
-        <li>
-            <a href="https://github.com/njahn82/roadoi">roadoi</a> is an R wrapper around the oaDOI API.
-            Has a nice README that includes a really slick usage example.
-        </li>
-        <li>
-            <a href="https://github.com/claytonllibrar/oaDOI-LibGuides-Widget">oaDOI-LibGuides-Widget</a>
-            lets you search oaDOI from within a LibGuide. Here's an example from
-            <a href="http://guides.lib.wayne.edu/c.php?g=174735&p=2659947#s-lg-box-wrapper-14700556">Wayne State LibGuides.</a>
-        </li>
-        <li>
-            Zotero can use oaDOI as
-            <a href="https://www.zotero.org/support/locate">a lookup engine.</a> Here's
-            <a href="https://github.com/Impactstory/oadoi/pull/1#issuecomment-255518267">a screencast of it in action.</a>
-        </li>
-    </ul>
-
-
-    <h2 id="dataset">Download the dataset</h2>
-    <p>
-        The dataset behind the oaDOI API is available for download as a big CSV file. It's free for use in
-        non-commercial academic research.
-        <a href="mailto:team@impactstory.org">Contact us</a> if you're interested in downloading it.
-
-    </p>
-    <p>
-        If you'd like to download the dataset for commercial
-        use, check out our
-        <a href="sla">service-level agreement</a> program.
-    </p>
 
 </div>

@@ -3,13 +3,41 @@ angular.module('templates.app', ['api.tpl.html', 'browser-tools.tpl.html', 'faq.
 angular.module("api.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("api.tpl.html",
     "<div class=\"page api\">\n" +
-    "    <h1>API</h1>\n" +
+    "    <h1>API and dataset</h1>\n" +
+    "    \n" +
+    "    <p>\n" +
+    "        There are two ways to get access to the oaDOI dataset: the API is the best bet for most\n" +
+    "        uses because it's simple, fast, and easy to get running; the dataset is great for\n" +
+    "        large-scale research and data mining.\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        Since we're\n" +
+    "        dealing with 90 million articles, it takes a while to run a given version of our OA-detection\n" +
+    "        algorithm across the\n" +
+    "        entire dataset. This means that at any given time there are results from multiple versions\n" +
+    "        of the algorithm\n" +
+    "        co-existing in the database. You can generally ignore this, but for some research\n" +
+    "        uses (including\n" +
+    "        replicating our <a\n" +
+    "            href=\"https://docs.google.com/document/d/1J9l8rhrT_tMfsw6cqjOnW9GuxBh2b0OYqke1vAWw73g/edit#\">recent study</a>),\n" +
+    "        it's important to take into account. For any given DOI, you can check the\n" +
+    "        <code>algorithm_version</code> key to see which algorithm generated the data we're reporting.\n" +
+    "        (in the case of the study, we limited results to ones obtained from version 2 of the algorithm).\n" +
+    "    </p>\n" +
+    "\n" +
+    "    <p>\n" +
+    "        If you're using the API or dataset, we recommend you subscribe to the\n" +
+    "        <a href=\"https://groups.google.com/forum/#!forum/oadoi-users\">mailing list</a> in order\n" +
+    "        to stay up-to-date when there are changes or new features.\n" +
+    "    </p>\n" +
+    "\n" +
+    "\n" +
+    "    <h2>API</h2>\n" +
+    "\n" +
     "    <p>\n" +
     "        Our REST API gives anyone free, programmatic access to all of oaDOI's data.\n" +
     "        There's currently no rate limit, although if you need more than 100k calls/day you\n" +
-    "        may want to use our\n" +
-    "        <a href=\"#dataset\">data dump</a>\n" +
-    "        instead.\n" +
+    "        may want to download the dataset instead.\n" +
     "    </p>\n" +
     "    <p>\n" +
     "        Requests must include your email, so that we can\n" +
@@ -17,14 +45,7 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        Add the email as a parameter at the end of the URL, like this:\n" +
     "        <code>?email=YOUR_EMAIL</code>.\n" +
     "    </p>\n" +
-    "    <p>\n" +
-    "        If you're using the API, we recommend you subscribe to the\n" +
-    "        <a href=\"https://groups.google.com/forum/#!forum/oadoi-users\">mailing list</a> in order\n" +
-    "        to stay up-to-date when there are changes or new features.\n" +
-    "    </p>\n" +
     "\n" +
-    "\n" +
-    "    <h2 id=\"return-format\">Endpoints</h2>\n" +
     "    <p>\n" +
     "        The API is very simple, and has just two endpoints. Both are read-only.\n" +
     "    </p>\n" +
@@ -50,26 +71,31 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "    </div>\n" +
     "\n" +
     "\n" +
+    "    <h2 id=\"dataset\">Download the dataset</h2>\n" +
+    "    <p>\n" +
+    "        The dataset behind the oaDOI API is available for download as a big CSV file. It's free for use in\n" +
+    "        non-commercial academic research.\n" +
+    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you're interested in downloading it.\n" +
+    "\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        If you'd like to download the dataset for commercial\n" +
+    "        use, check out our\n" +
+    "        <a href=\"sla\">service-level agreement</a> program.\n" +
+    "    </p>\n" +
+    "\n" +
+    "\n" +
     "    <h2 id=\"return-format\">Return format</h2>\n" +
     "    <div>\n" +
-    "        Here's an example of what you get back.\n" +
+    "        The labels for data are the same whether you're looking at JSON keys in API, or\n" +
+    "        column names in the dataset. Here are the labels, and some notes describing them.\n" +
+    "        Note that there may also be other experimental keys/columns at any given time, so\n" +
+    "        don't count on the number of keys remaining the same, and don't count on any\n" +
+    "        keys remaining the same, other than the stable ones described below:\n" +
     "    </div>\n" +
-    "    <pre><code class=\"json\">{\n" +
-    "      \"doi\": \"10.1038/nature12873\",\n" +
-    "      \"doi_resolver\": \"crossref\",\n" +
-    "      \"evidence\": \"oa repository (via base-search.net oa url)\",\n" +
-    "      \"free_fulltext_url\": \"https://dash.harvard.edu/bitstream/handle/1/12785839/3944098.pdf?sequence=1\",\n" +
-    "      \"is_boai_license\": false,\n" +
-    "      \"is_free_to_read\": true,\n" +
-    "      \"is_subscription_journal\": true,\n" +
-    "      \"license\": \"cc-by-nc\",\n" +
-    "      \"oa_color\": \"green\",\n" +
-    "      \"url\": \"http://doi.org/10.1038/nature12873\"\n" +
-    "    }</code></pre>\n" +
     "\n" +
-    "    Here are some notes on the response fields. The fields shown are stable, but\n" +
-    "    additional ones may be added over time, so don't count on the number of keys.\n" +
     "    <ul class=\"response-details\">\n" +
+    "        <li><code>algorithm_version</code>: Number. Represents the version of the OA-detection algorithm we used to gather data on this DOI.</li>\n" +
     "        <li><code>doi</code>: the requested DOI</li>\n" +
     "        <li><code>doi_resolver</code>: String. Possible values:\n" +
     "            <ul>\n" +
@@ -95,39 +121,6 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "\n" +
     "\n" +
-    "    <h2 id=\"examples\">Client libraries and example uses</h2>\n" +
-    "    The API is still new but there are already some great examples of folks using it. Drop us a line\n" +
-    "    if you've got something; we'd love to add you to this list. In no particular order:\n" +
-    "    <ul>\n" +
-    "        <li>\n" +
-    "            <a href=\"https://github.com/njahn82/roadoi\">roadoi</a> is an R wrapper around the oaDOI API.\n" +
-    "            Has a nice README that includes a really slick usage example.\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            <a href=\"https://github.com/claytonllibrar/oaDOI-LibGuides-Widget\">oaDOI-LibGuides-Widget</a>\n" +
-    "            lets you search oaDOI from within a LibGuide. Here's an example from\n" +
-    "            <a href=\"http://guides.lib.wayne.edu/c.php?g=174735&p=2659947#s-lg-box-wrapper-14700556\">Wayne State LibGuides.</a>\n" +
-    "        </li>\n" +
-    "        <li>\n" +
-    "            Zotero can use oaDOI as\n" +
-    "            <a href=\"https://www.zotero.org/support/locate\">a lookup engine.</a> Here's\n" +
-    "            <a href=\"https://github.com/Impactstory/oadoi/pull/1#issuecomment-255518267\">a screencast of it in action.</a>\n" +
-    "        </li>\n" +
-    "    </ul>\n" +
-    "\n" +
-    "\n" +
-    "    <h2 id=\"dataset\">Download the dataset</h2>\n" +
-    "    <p>\n" +
-    "        The dataset behind the oaDOI API is available for download as a big CSV file. It's free for use in\n" +
-    "        non-commercial academic research.\n" +
-    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you're interested in downloading it.\n" +
-    "\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        If you'd like to download the dataset for commercial\n" +
-    "        use, check out our\n" +
-    "        <a href=\"sla\">service-level agreement</a> program.\n" +
-    "    </p>\n" +
     "\n" +
     "</div>\n" +
     "");
@@ -339,10 +332,8 @@ angular.module("sla.tpl.html", []).run(["$templateCache", function($templateCach
     "<div class=\"page sla\">\n" +
     "    <h1>Service-Level Agreement</h1>\n" +
     "    <p>\n" +
-    "        If you want to use oaDOI data to build or enhance your commercial\n" +
-    "        service, you may appreciate our Service-Level Agreement (SLA).\n" +
-    "        The exact SLA details will vary depending on your needs and budget, but\n" +
-    "        the key benefits are:\n" +
+    "        Interested in commercial reuse of data from oaDOI? Check out our\n" +
+    "        Service-Level Agreement (SLA). Here are the benefits:\n" +
     "    </p>\n" +
     "    <ul>\n" +
     "        <li>\n" +
@@ -357,20 +348,24 @@ angular.module("sla.tpl.html", []).run(["$templateCache", function($templateCach
     "        <li>\n" +
     "            You'll get enterprise-level service and support established and guaranteed in writing.\n" +
     "        </li>\n" +
+    "        <li>\n" +
+    "            You help support oaDOI and keep it sustainable over the long term.\n" +
+    "        </li>\n" +
     "    </ul>\n" +
     "\n" +
     "    <p>\n" +
-    "        Of course, if you don't need any of these features and have a moderate call volume\n" +
-    "        (<100k/day), you'll be better served just hitting\n" +
-    "        <a href=\"api\">the API.</a>\n" +
-    "        That's free\n" +
-    "        to everyone for commercial and noncommercial use, and always will be.\n" +
+    "        Of course, if you don't need  these features,\n" +
+    "        you can always just use the\n" +
+    "        <a href=\"api\">API;</a> it's free to everyone for\n" +
+    "        any use, and always will be.\n" +
     "    </p>\n" +
     "\n" +
     "    <p>\n" +
-    "        Our pricing on the SLA is flexible, depending on your revenue and use-case. So if you think\n" +
-    "        the SLA might be useful, please <a href=\"mailto:team@impactstory.org\">contact us</a>\n" +
-    "        and we'd love to find a solution that works for you.\n" +
+    "        Our pricing on the SLA is flexible, depending on your revenue and use-case.\n" +
+    "        So if you're interested, please <a href=\"mailto:team@impactstory.org\">contact us;</a>\n" +
+    "        we'd love to hear from you!\n" +
+    "\n" +
+    "\n" +
     "    </p>\n" +
     "\n" +
     "\n" +

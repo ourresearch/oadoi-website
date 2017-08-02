@@ -37,6 +37,7 @@ angular.module('staticPages', [
         })
     })
 
+
     .config(function ($routeProvider) {
         $routeProvider.when('/about', {redirectTo: "/faq"})
     })
