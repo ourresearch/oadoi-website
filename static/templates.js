@@ -19,7 +19,7 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        co-existing in the database. You can generally ignore this, but for some research\n" +
     "        uses (including\n" +
     "        replicating our <a\n" +
-    "            href=\"https://docs.google.com/document/d/1J9l8rhrT_tMfsw6cqjOnW9GuxBh2b0OYqke1vAWw73g/edit#\">recent study</a>),\n" +
+    "            href=\"https://peerj.com/preprints/3119v1/\">recent study</a>),\n" +
     "        it's important to take into account. For any given DOI, you can check the\n" +
     "        <code>algorithm_version</code> key to see which algorithm generated the data we're reporting.\n" +
     "        (in the case of the study, we limited results to ones obtained from version 2 of the algorithm).\n" +
