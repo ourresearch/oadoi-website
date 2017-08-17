@@ -175,27 +175,48 @@ body {
 
 
     &.api {
-      h3 {
-      }
-      div.endpoint {
-        code.endpoint {
-          padding: 1px 5px;
-          border: none;
-          color: #fff;
-          background: #333;
+      table.api-responses {
+        tr {
+          vertical-align: top;
+          td {
+            border-top: 1px solid #eee;
+            padding: 10px;
+            &.key {
+              text-align: right;
+              .name {
+                font-weight: bold;
+              }
+              .type {
+                font-size: 70%;
+                display: block;
+              }
+            }
+
+            &.contents {
+
+            }
+
+            &.notes {
+              p {
+                margin-top: 0;
+              }
+              h4 {
+                margin: 0;
+                font-weight: normal;
+              }
+              ul {
+                padding: 0 0 0 20px;
+                margin:0;
+              }
+            }
+
+          }
         }
       }
 
-      pre {
-        //margin: 0;
-        &.smallen {
-          //height: 80px;
-          //margin-top: -20px;
-        }
-      }
-      ul.response-details {
-        line-height: 1.5;
-      }
+
+
+
     }
 
 

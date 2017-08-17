@@ -52,12 +52,12 @@ angular.module('staticPages', [
         $scope.global.title = $scope.global.template
 
         console.log("static page ctrl")
-        $timeout(function(){
-            if ($scope.global.template.indexOf("api") >= 0){
-                hljs.initHighlighting();
-            }
-
-        }, 0)
+        //$timeout(function(){
+        //    if ($scope.global.template.indexOf("api") >= 0){
+        //        hljs.initHighlighting();
+        //    }
+        //
+        //}, 0)
 
     })
 

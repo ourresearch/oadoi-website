@@ -125,14 +125,33 @@ body .page.landing .content .main-banner .subtagline {
   margin-bottom: 25px;
   line-height: 1.3;
 }
-body .page.api div.endpoint code.endpoint {
-  padding: 1px 5px;
-  border: none;
-  color: #fff;
-  background: #333;
+body .page.api table.api-responses tr {
+  vertical-align: top;
 }
-body .page.api ul.response-details {
-  line-height: 1.5;
+body .page.api table.api-responses tr td {
+  border-top: 1px solid #eee;
+  padding: 10px;
+}
+body .page.api table.api-responses tr td.key {
+  text-align: right;
+}
+body .page.api table.api-responses tr td.key .name {
+  font-weight: bold;
+}
+body .page.api table.api-responses tr td.key .type {
+  font-size: 70%;
+  display: block;
+}
+body .page.api table.api-responses tr td.notes p {
+  margin-top: 0;
+}
+body .page.api table.api-responses tr td.notes h4 {
+  margin: 0;
+  font-weight: normal;
+}
+body .page.api table.api-responses tr td.notes ul {
+  padding: 0 0 0 20px;
+  margin: 0;
 }
 body .page.faq h1 {
   margin-bottom: -20px;

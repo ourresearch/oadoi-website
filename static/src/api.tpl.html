@@ -1,39 +1,35 @@
 <div class="page api">
-    <h1>API and dataset</h1>
-    
-    <p>
-        There are two ways to get access to the oaDOI dataset: the API is the best bet for most
-        uses because it's simple, fast, and easy to get running; the dataset is great for
-        large-scale research and data mining.
-    </p>
-    <p>
-        Since we're
-        dealing with 90 million articles, it takes a while to run a given version of our OA-detection
-        algorithm across the
-        entire dataset. This means that at any given time there are results from multiple versions
-        of the algorithm
-        co-existing in the database. You can generally ignore this, but for some research
-        uses (including
-        replicating our <a
-            href="https://peerj.com/preprints/3119v1/">recent study</a>),
-        it's important to take into account. For any given DOI, you can check the
-        <code>algorithm_version</code> key to see which algorithm generated the data we're reporting.
-        (in the case of the study, we limited results to ones obtained from version 2 of the algorithm).
-    </p>
+    <h1>API and datasets</h1>
 
-    <p>
-        If you're using the API or dataset, we recommend you subscribe to the
+
+    <ul class="toc">
+        <li><a href="#api-v1">API v1</a></li>
+        <li><a href="#api-v2">API v2</a></li>
+        <li><a href="#datasets">Datasets</a></li>
+    </ul>
+
+     <p>
+        There are two ways to get access to the oaDOI dataset: the API is best for most
+        uses because it's simple, fast, and easy to get running; the datasets are great for
+        large-scale research and data mining. Whichever you're using, we recommend you subscribe to the
         <a href="https://groups.google.com/forum/#!forum/oadoi-users">mailing list</a> in order
-        to stay up-to-date when there are changes or new features.
+        to stay up-to-date when there are changes or new features. Keep in mind when using
+         either the API or dataset that occasionally experimental keys/columns may appear,
+         in addition to those described below; of course, don't build anything important on those
+         until they're officially documented.
     </p>
 
 
-    <h2>API</h2>
+    <h2 id="api-v1">API version 1</h2>
+    <div class="version notes">
+        This is currently the default version; however v2 will become the default
+        on October 1, 2017, so we recommend new users build on v2.
+    </div>
 
     <p>
-        Our REST API gives anyone free, programmatic access to all of oaDOI's data.
+        The REST API gives anyone free, programmatic access to all of oaDOI's data.
         There's currently no rate limit, although if you need more than 100k calls/day you
-        may want to download the dataset instead.
+        may want to download the datasets instead.
     </p>
     <p>
         Requests must include your email, so that we can
@@ -42,14 +38,12 @@
         <code>?email=YOUR_EMAIL</code>.
     </p>
 
-    <p>
-        The API is very simple, and has just two endpoints. Both are read-only.
-    </p>
 
     <div class="endpoint">
+        <pre>
+            <code class="endpoint">GET /</code>
+        </pre>
         <p>
-        <code class="endpoint">GET /</code>
-
             gets information about the API.
             Returns a status object with version number. Try it here:
              <a href="https://api.oadoi.org">https://api.oadoi.org?email=test@example.com</a>
@@ -57,38 +51,127 @@
 
     </div>
 
-
     <div class="endpoint">
-        <p>
-        <code class="endpoint">GET /:doi</code>
-            gets data about a single DOI.  Try this example:
-            <a href="https://api.oadoi.org/10.1038/nature12373">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>
-        </p>
+        <pre>
+            <code class="endpoint">GET /:doi</code>
+                gets data about a single DOI.  Try this example:
+                <a href="https://api.oadoi.org/10.1038/nature12373">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>
+        </pre>
+
+        <table class="api-responses">
+            <tr>
+                <td class="key">
+                    <span class="name">algorithm_version</span>
+                    <span class="type">Integer</span>
+                </td>
+                <td class="contents">
+                    Indicates the data collection approaches used for this article.
+                </td>
+                <td class="notes">
+                    <h4>Possible values</h4>
+                    <ul>
+                        <li>
+                            <span class="value">1</span>
+                            <span class="notes">
+                                First-generation hybrid detection. Uses only data from the Crossref API to determine hybrid status. Does a good job for Elsevier articles and a few other publishers, but most publishers are not checked for hybrid.
+                            </span>
+                        </li>
+                        <li>
+                            <span class="value">2</span>
+                            <span class="notes">
+                                Second-generation hybrid detection. Uses additional sources, checks all publishers for hybrid. Gets about 10x as much hybrid. <code>data_standard==2</code> is the version used in the paper we wrote about oaDOI.
+                            </span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="key">
+                    <span class="name">doi</span>
+                    <span class="type">String</span>
+                </td>
+                <td class="contents">
+                    The requested DOI.
+                </td>
+                <td class="notes">
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="key">
+                    <span class="name">doi_resolver</span>
+                    <span class="type">String</span>
+                </td>
+                <td class="contents">
+                    The organization in charge of issuing and resolving this DOI.
+                </td>
+                <td class="notes">
+                    <h4>Possible values</h4>
+                    <ul>
+                        <li>
+                            <span class="value">crossref</span>
+                            <span class="notes">
+                                This is a Crossref DOI
+                            </span>
+                        </li>
+                        <li>
+                            <span class="value">datacite</span>
+                            <span class="notes">
+                                This is a Datacite DOI.
+                            </span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td class="key">
+                    <span class="name">evidence</span>
+                    <span class="type">String</span>
+                </td>
+                <td class="contents">
+                    Free-text string describing how we found the <code>free_fulltext_url</code>.
+                </td>
+                <td class="notes">
+                    <p>
+                        Used for debugging. Don’t depend on the exact contents of this for anything, because values are subject to change without warning.
+
+                    </p>
+                    <h4>Example values</h4>
+                    <ul>
+                        <li>
+                            <span class="value">oa journal (via journal title in doaj)</span>
+                            <span class="notes">
+                                We found the name of the journal that publishes this article in the DOAJ database.
+                            </span>
+                        </li>
+                        <li>
+                            <span class="value">oa repository (via pmcid lookup)</span>
+                            <span class="notes">
+                                We found this article in an index of PubMed Central articles.
+                            </span>
+                        </li>
+                        <li>
+                            <span class="value">...</span>
+                            <span class="notes">
+                            </span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+        </table>
+
+
     </div>
 
-
-    <h2 id="dataset">Download the dataset</h2>
-    <p>
-        The dataset behind the oaDOI API is available for download as a big CSV file. It's free for use in
-        non-commercial academic research.
-        <a href="mailto:team@impactstory.org">Contact us</a> if you're interested in downloading it.
-
-    </p>
-    <p>
-        If you'd like to download the dataset for commercial
-        use, check out our
-        <a href="sla">service-level agreement</a> program.
-    </p>
-
-
-    <h2 id="return-format">Return format</h2>
-    <div>
-        The labels for data are the same whether you're looking at JSON keys in API, or
-        column names in the dataset. Here are the labels, and some notes describing them.
-        Note that there may also be other experimental keys/columns at any given time, so
-        don't count on the number of keys remaining the same, and don't count on any
-        keys remaining the same, other than the stable ones described below:
-    </div>
 
     <ul class="response-details">
         <li><code>algorithm_version</code>: Number. Represents the version of the OA-detection algorithm we used to gather data on this DOI.</li>
@@ -115,6 +198,22 @@
 
     </ul>
 
+
+
+
+    <h2 id="datasets">Datasets</h2>
+    <p>
+        The datasets behind the oaDOI API are available for download as two big CSV files.
+        They are free for use in
+        non-commercial academic research.
+        <a href="mailto:team@impactstory.org">Contact us</a> if you're interested in downloading it.
+
+    </p>
+    <p>
+        If you'd like to download the datasets for commercial
+        use, check out our
+        <a href="sla">service-level agreement</a> program.
+    </p>
 
 
 

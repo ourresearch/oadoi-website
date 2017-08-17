@@ -384,12 +384,12 @@ angular.module('staticPages', [
         $scope.global.title = $scope.global.template
 
         console.log("static page ctrl")
-        $timeout(function(){
-            if ($scope.global.template.indexOf("api") >= 0){
-                hljs.initHighlighting();
-            }
-
-        }, 0)
+        //$timeout(function(){
+        //    if ($scope.global.template.indexOf("api") >= 0){
+        //        hljs.initHighlighting();
+        //    }
+        //
+        //}, 0)
 
     })
 
@@ -408,41 +408,37 @@ angular.module('templates.app', ['api.tpl.html', 'browser-tools.tpl.html', 'faq.
 angular.module("api.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("api.tpl.html",
     "<div class=\"page api\">\n" +
-    "    <h1>API and dataset</h1>\n" +
-    "    \n" +
-    "    <p>\n" +
-    "        There are two ways to get access to the oaDOI dataset: the API is the best bet for most\n" +
-    "        uses because it's simple, fast, and easy to get running; the dataset is great for\n" +
-    "        large-scale research and data mining.\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        Since we're\n" +
-    "        dealing with 90 million articles, it takes a while to run a given version of our OA-detection\n" +
-    "        algorithm across the\n" +
-    "        entire dataset. This means that at any given time there are results from multiple versions\n" +
-    "        of the algorithm\n" +
-    "        co-existing in the database. You can generally ignore this, but for some research\n" +
-    "        uses (including\n" +
-    "        replicating our <a\n" +
-    "            href=\"https://peerj.com/preprints/3119v1/\">recent study</a>),\n" +
-    "        it's important to take into account. For any given DOI, you can check the\n" +
-    "        <code>algorithm_version</code> key to see which algorithm generated the data we're reporting.\n" +
-    "        (in the case of the study, we limited results to ones obtained from version 2 of the algorithm).\n" +
-    "    </p>\n" +
+    "    <h1>API and datasets</h1>\n" +
     "\n" +
-    "    <p>\n" +
-    "        If you're using the API or dataset, we recommend you subscribe to the\n" +
+    "\n" +
+    "    <ul class=\"toc\">\n" +
+    "        <li><a href=\"#api-v1\">API v1</a></li>\n" +
+    "        <li><a href=\"#api-v2\">API v2</a></li>\n" +
+    "        <li><a href=\"#datasets\">Datasets</a></li>\n" +
+    "    </ul>\n" +
+    "\n" +
+    "     <p>\n" +
+    "        There are two ways to get access to the oaDOI dataset: the API is best for most\n" +
+    "        uses because it's simple, fast, and easy to get running; the datasets are great for\n" +
+    "        large-scale research and data mining. Whichever you're using, we recommend you subscribe to the\n" +
     "        <a href=\"https://groups.google.com/forum/#!forum/oadoi-users\">mailing list</a> in order\n" +
-    "        to stay up-to-date when there are changes or new features.\n" +
+    "        to stay up-to-date when there are changes or new features. Keep in mind when using\n" +
+    "         either the API or dataset that occasionally experimental keys/columns may appear,\n" +
+    "         in addition to those described below; of course, don't build anything important on those\n" +
+    "         until they're officially documented.\n" +
     "    </p>\n" +
     "\n" +
     "\n" +
-    "    <h2>API</h2>\n" +
+    "    <h2 id=\"api-v1\">API version 1</h2>\n" +
+    "    <div class=\"version notes\">\n" +
+    "        This is currently the default version; however v2 will become the default\n" +
+    "        on October 1, 2017, so we recommend new users build on v2.\n" +
+    "    </div>\n" +
     "\n" +
     "    <p>\n" +
-    "        Our REST API gives anyone free, programmatic access to all of oaDOI's data.\n" +
+    "        The REST API gives anyone free, programmatic access to all of oaDOI's data.\n" +
     "        There's currently no rate limit, although if you need more than 100k calls/day you\n" +
-    "        may want to download the dataset instead.\n" +
+    "        may want to download the datasets instead.\n" +
     "    </p>\n" +
     "    <p>\n" +
     "        Requests must include your email, so that we can\n" +
@@ -451,14 +447,12 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        <code>?email=YOUR_EMAIL</code>.\n" +
     "    </p>\n" +
     "\n" +
-    "    <p>\n" +
-    "        The API is very simple, and has just two endpoints. Both are read-only.\n" +
-    "    </p>\n" +
     "\n" +
     "    <div class=\"endpoint\">\n" +
+    "        <pre>\n" +
+    "            <code class=\"endpoint\">GET /</code>\n" +
+    "        </pre>\n" +
     "        <p>\n" +
-    "        <code class=\"endpoint\">GET /</code>\n" +
-    "\n" +
     "            gets information about the API.\n" +
     "            Returns a status object with version number. Try it here:\n" +
     "             <a href=\"https://api.oadoi.org\">https://api.oadoi.org?email=test@example.com</a>\n" +
@@ -466,38 +460,127 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "    </div>\n" +
     "\n" +
-    "\n" +
     "    <div class=\"endpoint\">\n" +
-    "        <p>\n" +
-    "        <code class=\"endpoint\">GET /:doi</code>\n" +
-    "            gets data about a single DOI.  Try this example:\n" +
-    "            <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>\n" +
-    "        </p>\n" +
+    "        <pre>\n" +
+    "            <code class=\"endpoint\">GET /:doi</code>\n" +
+    "                gets data about a single DOI.  Try this example:\n" +
+    "                <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>\n" +
+    "        </pre>\n" +
+    "\n" +
+    "        <table class=\"api-responses\">\n" +
+    "            <tr>\n" +
+    "                <td class=\"key\">\n" +
+    "                    <span class=\"name\">algorithm_version</span>\n" +
+    "                    <span class=\"type\">Integer</span>\n" +
+    "                </td>\n" +
+    "                <td class=\"contents\">\n" +
+    "                    Indicates the data collection approaches used for this article.\n" +
+    "                </td>\n" +
+    "                <td class=\"notes\">\n" +
+    "                    <h4>Possible values</h4>\n" +
+    "                    <ul>\n" +
+    "                        <li>\n" +
+    "                            <span class=\"value\">1</span>\n" +
+    "                            <span class=\"notes\">\n" +
+    "                                First-generation hybrid detection. Uses only data from the Crossref API to determine hybrid status. Does a good job for Elsevier articles and a few other publishers, but most publishers are not checked for hybrid.\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                        <li>\n" +
+    "                            <span class=\"value\">2</span>\n" +
+    "                            <span class=\"notes\">\n" +
+    "                                Second-generation hybrid detection. Uses additional sources, checks all publishers for hybrid. Gets about 10x as much hybrid. <code>data_standard==2</code> is the version used in the paper we wrote about oaDOI.\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                    </ul>\n" +
+    "                </td>\n" +
+    "            </tr>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            <tr>\n" +
+    "                <td class=\"key\">\n" +
+    "                    <span class=\"name\">doi</span>\n" +
+    "                    <span class=\"type\">String</span>\n" +
+    "                </td>\n" +
+    "                <td class=\"contents\">\n" +
+    "                    The requested DOI.\n" +
+    "                </td>\n" +
+    "                <td class=\"notes\">\n" +
+    "                </td>\n" +
+    "            </tr>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            <tr>\n" +
+    "                <td class=\"key\">\n" +
+    "                    <span class=\"name\">doi_resolver</span>\n" +
+    "                    <span class=\"type\">String</span>\n" +
+    "                </td>\n" +
+    "                <td class=\"contents\">\n" +
+    "                    The organization in charge of issuing and resolving this DOI.\n" +
+    "                </td>\n" +
+    "                <td class=\"notes\">\n" +
+    "                    <h4>Possible values</h4>\n" +
+    "                    <ul>\n" +
+    "                        <li>\n" +
+    "                            <span class=\"value\">crossref</span>\n" +
+    "                            <span class=\"notes\">\n" +
+    "                                This is a Crossref DOI\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                        <li>\n" +
+    "                            <span class=\"value\">datacite</span>\n" +
+    "                            <span class=\"notes\">\n" +
+    "                                This is a Datacite DOI.\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                    </ul>\n" +
+    "                </td>\n" +
+    "            </tr>\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "            <tr>\n" +
+    "                <td class=\"key\">\n" +
+    "                    <span class=\"name\">evidence</span>\n" +
+    "                    <span class=\"type\">String</span>\n" +
+    "                </td>\n" +
+    "                <td class=\"contents\">\n" +
+    "                    Free-text string describing how we found the <code>free_fulltext_url</code>.\n" +
+    "                </td>\n" +
+    "                <td class=\"notes\">\n" +
+    "                    <p>\n" +
+    "                        Used for debugging. Don’t depend on the exact contents of this for anything, because values are subject to change without warning.\n" +
+    "\n" +
+    "                    </p>\n" +
+    "                    <h4>Example values</h4>\n" +
+    "                    <ul>\n" +
+    "                        <li>\n" +
+    "                            <span class=\"value\">oa journal (via journal title in doaj)</span>\n" +
+    "                            <span class=\"notes\">\n" +
+    "                                We found the name of the journal that publishes this article in the DOAJ database.\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                        <li>\n" +
+    "                            <span class=\"value\">oa repository (via pmcid lookup)</span>\n" +
+    "                            <span class=\"notes\">\n" +
+    "                                We found this article in an index of PubMed Central articles.\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                        <li>\n" +
+    "                            <span class=\"value\">...</span>\n" +
+    "                            <span class=\"notes\">\n" +
+    "                            </span>\n" +
+    "                        </li>\n" +
+    "                    </ul>\n" +
+    "                </td>\n" +
+    "            </tr>\n" +
+    "\n" +
+    "        </table>\n" +
+    "\n" +
+    "\n" +
     "    </div>\n" +
     "\n" +
-    "\n" +
-    "    <h2 id=\"dataset\">Download the dataset</h2>\n" +
-    "    <p>\n" +
-    "        The dataset behind the oaDOI API is available for download as a big CSV file. It's free for use in\n" +
-    "        non-commercial academic research.\n" +
-    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you're interested in downloading it.\n" +
-    "\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        If you'd like to download the dataset for commercial\n" +
-    "        use, check out our\n" +
-    "        <a href=\"sla\">service-level agreement</a> program.\n" +
-    "    </p>\n" +
-    "\n" +
-    "\n" +
-    "    <h2 id=\"return-format\">Return format</h2>\n" +
-    "    <div>\n" +
-    "        The labels for data are the same whether you're looking at JSON keys in API, or\n" +
-    "        column names in the dataset. Here are the labels, and some notes describing them.\n" +
-    "        Note that there may also be other experimental keys/columns at any given time, so\n" +
-    "        don't count on the number of keys remaining the same, and don't count on any\n" +
-    "        keys remaining the same, other than the stable ones described below:\n" +
-    "    </div>\n" +
     "\n" +
     "    <ul class=\"response-details\">\n" +
     "        <li><code>algorithm_version</code>: Number. Represents the version of the OA-detection algorithm we used to gather data on this DOI.</li>\n" +
@@ -524,6 +607,22 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "    </ul>\n" +
     "\n" +
+    "\n" +
+    "\n" +
+    "\n" +
+    "    <h2 id=\"datasets\">Datasets</h2>\n" +
+    "    <p>\n" +
+    "        The datasets behind the oaDOI API are available for download as two big CSV files.\n" +
+    "        They are free for use in\n" +
+    "        non-commercial academic research.\n" +
+    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you're interested in downloading it.\n" +
+    "\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        If you'd like to download the datasets for commercial\n" +
+    "        use, check out our\n" +
+    "        <a href=\"sla\">service-level agreement</a> program.\n" +
+    "    </p>\n" +
     "\n" +
     "\n" +
     "\n" +
