@@ -130,10 +130,29 @@ body .page.api .version-warning {
   padding: 20px;
   border-radius: 3px;
 }
-body .page.api code.endpoint {
-  display: block;
-  font-size: 140%;
-  margin: 100px 0 0;
+body .page.api .version-good {
+  background: lightgreen;
+  padding: 20px;
+  border-radius: 3px;
+}
+body .page.api .version-good code {
+  background: none;
+  border-color: #333;
+}
+body .page.api div.endpoint {
+  margin-bottom: 40px;
+}
+body .page.api div.endpoint code {
+  font-size: 120%;
+}
+body .page.api div.endpoint table {
+  margin-top: 20px;
+}
+body .page.api div.endpoint table td {
+  padding: 2px 7px;
+}
+body .page.api div.endpoint table td.k {
+  text-align: right;
 }
 body .page.api table.api-responses {
   margin-bottom: 90px;
@@ -147,7 +166,7 @@ body .page.api table.api-responses tr td {
 }
 body .page.api table.api-responses tr td.key {
   text-align: right;
-  min-width: 200px;
+  min-width: 150px;
   padding: 10px 10px 0 0;
 }
 body .page.api table.api-responses tr td.key .name {
@@ -156,6 +175,9 @@ body .page.api table.api-responses tr td.key .name {
 body .page.api table.api-responses tr td.key .type {
   font-size: 70%;
   display: block;
+}
+body .page.api table.api-responses tr td.contents {
+  min-width: 150px;
 }
 body .page.api table.api-responses tr td.notes p {
   margin-top: 0;

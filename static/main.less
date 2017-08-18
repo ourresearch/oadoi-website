@@ -180,12 +180,30 @@ body {
         padding: 20px;
         border-radius: 3px;
       }
+      .version-good {
+        background: lightgreen;
+        padding: 20px;
+        border-radius: 3px;
+        code {
+          background: none;
+          border-color: #333;
+        }
+      }
 
-      code.endpoint {
-        display: block;
-        font-size: 140%;
-        margin: 100px 0 0;
-
+      div.endpoint {
+        margin-bottom: 40px;
+        code {
+          font-size: 120%;
+        }
+        table {
+          margin-top: 20px;
+          td {
+            padding: 2px 7px;
+          }
+          td.k{
+            text-align: right;
+          }
+        }
       }
 
       table.api-responses {
@@ -200,7 +218,7 @@ body {
             padding: 10px;
             &.key {
               text-align: right;
-              min-width: 200px;
+              min-width: 150px;
               padding: 10px 10px 0 0;
               .name {
                 font-weight: bold;
@@ -212,7 +230,7 @@ body {
             }
 
             &.contents {
-
+              min-width: 150px;
             }
 
             &.notes {
