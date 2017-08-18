@@ -25,6 +25,20 @@ angular.module('staticPages', [
     })
 
     .config(function ($routeProvider) {
+        $routeProvider.when('/api/v1', {
+            templateUrl: "api-v1.tpl.html",
+            controller: "StaticPageCtrl"
+        })
+    })
+
+    .config(function ($routeProvider) {
+        $routeProvider.when('/api/v2', {
+            templateUrl: "api-v2.tpl.html",
+            controller: "StaticPageCtrl"
+        })
+    })
+
+    .config(function ($routeProvider) {
         $routeProvider.when('/faq', {
             templateUrl: "faq.tpl.html",
             controller: "StaticPageCtrl"

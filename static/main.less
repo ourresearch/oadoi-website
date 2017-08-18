@@ -56,7 +56,7 @@ body {
   code {
     font-family: monospace;
     background: #fafafa;
-    padding: 2px 5px;
+    padding: 1px 2px;
     border-radius: 3px;
     border: 1px solid #ddd;
     font-size: 80%;
@@ -175,14 +175,33 @@ body {
 
 
     &.api {
+      .version-warning {
+        background: lightpink;
+        padding: 20px;
+        border-radius: 3px;
+      }
+
+      code.endpoint {
+        display: block;
+        font-size: 140%;
+        margin: 100px 0 0;
+
+      }
+
       table.api-responses {
+        margin-bottom: 90px;
         tr {
           vertical-align: top;
+          //&:nth-child(odd) {
+          //  background: #fafafa;
+          //}
           td {
-            border-top: 1px solid #eee;
+            border-top: 1px solid #ddd;
             padding: 10px;
             &.key {
               text-align: right;
+              min-width: 200px;
+              padding: 10px 10px 0 0;
               .name {
                 font-weight: bold;
               }
