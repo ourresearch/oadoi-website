@@ -26,7 +26,7 @@
 
 
 
-    <h2 id="limits">Limits and authentication</h2>
+    <h2 class="anchor"  id="limits">Limits and authentication</h2>
     <p>
         The REST API gives anyone free, programmatic access to all of oaDOI's data.
         There's no rate limit, but if you need more than 100k calls/day you
@@ -46,7 +46,7 @@
     </p>
 
 
-    <h2 id="endpoints">Endpoints</h2>
+    <h2 class="anchor"  id="endpoints">Endpoints</h2>
 
 
     <div class="endpoint" id="get-base">
@@ -145,11 +145,11 @@
 
     --------------------------------------------------------------------------->
 
-    <h2 id="response-objects">Response objects</h2>
+    <h2 class="anchor"  id="response-objects">Response objects</h2>
     <p>The API returns three different types of response objects. Really two, since more users won't ever need the API Status object, which just defines the root of the API. The OA Location object describes a place we found an OA copy of an article. There are one or more of these associated with DOI object, which describes a given DOI-assigned resource.</p>
 
 
-    <h3 id="api-status-object">API Status object</h3>
+    <h3 class="anchor" id="api-status-object">API Status object</h3>
     <table class="api-responses">
         <tr>
             <td class="key">
@@ -192,7 +192,7 @@
 
 
 
-    <h3 id="oa-location-object">OA Location object</h3>
+    <h3 class="anchor" id="oa-location-object">OA Location object</h3>
     <p>The OA Location object describes particular location where we found a given OA article. The same article is often available from multiple locations. There may be differences in format, version, and license from one location to another, even if it's the same article in all cases.</p>
     <table class="api-responses">
         <tr>
@@ -265,7 +265,7 @@
                 The license under which this copy is published.
             </td>
             <td class="notes">
-                <h4>We return several types of licenses:</h4>
+                <p>We return several types of licenses:</p>
                 <ul>
                     <li>
                         Creative Commons licenses are uniformly abbreviated and lowercased. Example: <code>cc-by-nc</code>
@@ -353,7 +353,7 @@
 
 
 
-    <h3 id="doi-object">DOI object</h3>
+    <h3 class="anchor" id="doi-object">DOI object</h3>
     <p>The DOI object describes a given DOI-assigned resource. It contains metadata about the resource itself, as well as information about its OA status.</p>
 
     <table class="api-responses">
@@ -385,7 +385,7 @@
                 Indicates the data collection approaches used for this resource.
             </td>
             <td class="notes">
-                <h4>Possible values</h4>
+                <p>Possible values</p>
                 <ul>
                     <li>
                         <span class="value"><code>1</code></span>

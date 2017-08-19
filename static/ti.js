@@ -422,6 +422,7 @@ angular.module('templates.app', ['api-v1.tpl.html', 'api-v2.tpl.html', 'api.tpl.
 angular.module("api-v1.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("api-v1.tpl.html",
     "<div class=\"page api api-v2\">\n" +
+    "\n" +
     "    <h1>API Version 1</h1>\n" +
     "    <div class=\"version-warning\">\n" +
     "        This is currently the default version; however <a href=\"api/v2\">v2</a> will become the default\n" +
@@ -809,7 +810,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "\n" +
     "\n" +
     "\n" +
-    "    <h2 id=\"limits\">Limits and authentication</h2>\n" +
+    "    <h2 class=\"anchor\"  id=\"limits\">Limits and authentication</h2>\n" +
     "    <p>\n" +
     "        The REST API gives anyone free, programmatic access to all of oaDOI's data.\n" +
     "        There's no rate limit, but if you need more than 100k calls/day you\n" +
@@ -829,7 +830,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "    </p>\n" +
     "\n" +
     "\n" +
-    "    <h2 id=\"endpoints\">Endpoints</h2>\n" +
+    "    <h2 class=\"anchor\"  id=\"endpoints\">Endpoints</h2>\n" +
     "\n" +
     "\n" +
     "    <div class=\"endpoint\" id=\"get-base\">\n" +
@@ -928,11 +929,11 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "\n" +
     "    --------------------------------------------------------------------------->\n" +
     "\n" +
-    "    <h2 id=\"response-objects\">Response objects</h2>\n" +
+    "    <h2 class=\"anchor\"  id=\"response-objects\">Response objects</h2>\n" +
     "    <p>The API returns three different types of response objects. Really two, since more users won't ever need the API Status object, which just defines the root of the API. The OA Location object describes a place we found an OA copy of an article. There are one or more of these associated with DOI object, which describes a given DOI-assigned resource.</p>\n" +
     "\n" +
     "\n" +
-    "    <h3 id=\"api-status-object\">API Status object</h3>\n" +
+    "    <h3 class=\"anchor\" id=\"api-status-object\">API Status object</h3>\n" +
     "    <table class=\"api-responses\">\n" +
     "        <tr>\n" +
     "            <td class=\"key\">\n" +
@@ -975,7 +976,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "\n" +
     "\n" +
     "\n" +
-    "    <h3 id=\"oa-location-object\">OA Location object</h3>\n" +
+    "    <h3 class=\"anchor\" id=\"oa-location-object\">OA Location object</h3>\n" +
     "    <p>The OA Location object describes particular location where we found a given OA article. The same article is often available from multiple locations. There may be differences in format, version, and license from one location to another, even if it's the same article in all cases.</p>\n" +
     "    <table class=\"api-responses\">\n" +
     "        <tr>\n" +
@@ -1048,7 +1049,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "                The license under which this copy is published.\n" +
     "            </td>\n" +
     "            <td class=\"notes\">\n" +
-    "                <h4>We return several types of licenses:</h4>\n" +
+    "                <p>We return several types of licenses:</p>\n" +
     "                <ul>\n" +
     "                    <li>\n" +
     "                        Creative Commons licenses are uniformly abbreviated and lowercased. Example: <code>cc-by-nc</code>\n" +
@@ -1136,7 +1137,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "\n" +
     "\n" +
     "\n" +
-    "    <h3 id=\"doi-object\">DOI object</h3>\n" +
+    "    <h3 class=\"anchor\" id=\"doi-object\">DOI object</h3>\n" +
     "    <p>The DOI object describes a given DOI-assigned resource. It contains metadata about the resource itself, as well as information about its OA status.</p>\n" +
     "\n" +
     "    <table class=\"api-responses\">\n" +
@@ -1168,7 +1169,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "                Indicates the data collection approaches used for this resource.\n" +
     "            </td>\n" +
     "            <td class=\"notes\">\n" +
-    "                <h4>Possible values</h4>\n" +
+    "                <p>Possible values</p>\n" +
     "                <ul>\n" +
     "                    <li>\n" +
     "                        <span class=\"value\"><code>1</code></span>\n" +
@@ -1319,860 +1320,41 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "    <h1>API and datasets</h1>\n" +
     "\n" +
     "\n" +
-    "    <ul class=\"toc\">\n" +
-    "        <li><a href=\"#api-v1\">API v1</a></li>\n" +
-    "        <li><a href=\"#api-v2\">API v2</a></li>\n" +
-    "        <li><a href=\"#datasets\">Datasets</a></li>\n" +
-    "    </ul>\n" +
-    "\n" +
     "     <p>\n" +
-    "        There are two ways to get access to the oaDOI dataset: the API is best for most\n" +
-    "        uses because it's simple, fast, and easy to get running; the datasets are great for\n" +
-    "        large-scale research and data mining. Whichever you're using, we recommend you subscribe to the\n" +
+    "        There are are two main ways to access oaDOI's data: the API and the datasets.\n" +
+    "\n" +
+    "     </p>\n" +
+    "    <p>\n" +
+    "         The API is much easier to use, so it's probably your best bet.\n" +
+    "        Most applications will not have scale problems using the\n" +
+    "         API, as it can handle 100k/day from your application, and average return time is <200ms.\n" +
+    "        The datasets are quite large (90M and 19M rows) and so using them requires some extra work, but\n" +
+    "        they are great for some large research projects. The API is free for both commercial\n" +
+    "        and noncommercial use.\n" +
+    "    </p>\n" +
+    "    <p>\n" +
+    "        Whichever you're using, we recommend you subscribe to the\n" +
     "        <a href=\"https://groups.google.com/forum/#!forum/oadoi-users\">mailing list</a> in order\n" +
-    "        to stay up-to-date when there are changes or new features. Keep in mind when using\n" +
-    "         either the API or dataset that occasionally experimental keys/columns may appear,\n" +
-    "         in addition to those described below; of course, don't build anything important on those\n" +
-    "         until they're officially documented.\n" +
+    "        to stay up-to-date when there are changes or new features.\n" +
     "    </p>\n" +
     "\n" +
-    "\n" +
-    "\n" +
-    "    <!--\n" +
-    "\n" +
-    "    API VERSION 1\n" +
-    "    ######################################################################################\n" +
-    "    -->\n" +
-    "\n" +
-    "\n" +
-    "    <h2 id=\"api-v1\">API version 1</h2>\n" +
-    "    <div class=\"version notes\">\n" +
-    "        This is currently the default version; however v2 will become the default\n" +
-    "        on October 1, 2017, so we recommend new users build on v2.\n" +
-    "    </div>\n" +
-    "\n" +
+    "    <h2>API Version 1</h2>\n" +
     "    <p>\n" +
-    "        The REST API gives anyone free, programmatic access to all of oaDOI's data.\n" +
-    "        There's no rate limit, but if you need more than 100k calls/day you\n" +
-    "        may want to download the datasets instead.\n" +
+    "        This is currently the default version; however <a href=\"api/v2\">v2</a> will become the default\n" +
+    "        on October 1, 2017, so we recommend new users build on v2. <a href=\"/api/v1\">Read the v1 documentation here.</a>\n" +
     "    </p>\n" +
+    "\n" +
+    "    <h2>API Version 2</h2>\n" +
     "    <p>\n" +
-    "        Requests must include your email, so that we can\n" +
-    "        get in touch if something breaks, and so we can report usage to our funders.\n" +
-    "        Add the email as a parameter at the end of the URL, like this:\n" +
-    "        <code>?email=YOUR_EMAIL</code>.\n" +
+    "        Version 2 will become the default version on October 1, 2017, and we recommend that new users build on this version. <a href=\"/api/v2\">Read the v2 documentation here.</a>\n" +
     "    </p>\n" +
     "\n" +
-    "\n" +
-    "    <div class=\"endpoint\">\n" +
-    "        <code class=\"endpoint\">GET /</code>\n" +
-    "        <p>\n" +
-    "            gets information about the API.\n" +
-    "            Returns a status object with version number. Try it here:\n" +
-    "             <a href=\"https://api.oadoi.org\">https://api.oadoi.org?email=test@example.com</a>\n" +
-    "        </p>\n" +
-    "\n" +
-    "        <table class=\"api-responses\">\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">documentation_url</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Where you can find documentation for this version.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">msg</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Relevant messages.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">version</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Version string.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    Example: <code>1.3.0</code>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "        </table>\n" +
-    "\n" +
-    "    </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "    <div class=\"endpoint\">\n" +
-    "        <code class=\"endpoint\">GET /:doi</code>\n" +
-    "        <p>\n" +
-    "            gets data about a single DOI.  Try this example:\n" +
-    "            <a href=\"https://api.oadoi.org/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>\n" +
-    "\n" +
-    "        </p>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "        <table class=\"api-responses\">\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">algorithm_version</span>\n" +
-    "                    <span class=\"type\">Integer</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Indicates the data collection approaches used for this article.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Possible values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>1</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                First-generation hybrid detection. Uses only data from the Crossref API to determine hybrid status. Does a good job for Elsevier articles and a few other publishers, but most publishers are not checked for hybrid.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>2</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                Second-generation hybrid detection. Uses additional sources, checks all publishers for hybrid. Gets about 10x as much hybrid. <code>data_standard==2</code> is the version used in the paper we wrote about oaDOI.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">doi</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The requested DOI.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">doi_resolver</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The organization in charge of issuing and resolving this DOI.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Possible values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>crossref</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                This is a Crossref DOI\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>datacite</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                This is a Datacite DOI.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">evidence</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Free-text string describing how we found the <code>free_fulltext_url</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <p>\n" +
-    "                        Used for debugging. Don’t depend on the exact contents of this for anything, because values are subject to change without warning.\n" +
-    "\n" +
-    "                    </p>\n" +
-    "                    <h4>Example values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>oa journal (via journal title in doaj)</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                We found the name of the journal that publishes this article in the DOAJ database.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>oa repository (via pmcid lookup)</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                We found this article in an index of PubMed Central articles.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\">...</span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">free_fulltext_url</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    URL where the best fulltext copy of this article lives.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <p>\n" +
-    "                        The fulltext can be in various formats, including PDF, HTML, or even Word.\n" +
-    "                    </p>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">is_boai_license</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    True whenever the <code>license</code> is <code>cc-by</code>, <code>cc0</code>, or <code>PD</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <p>\n" +
-    "                        This key attempts to identify articles that meets the widely-used <a\n" +
-    "                            href=\"https://www.wikiwand.com/en/Budapest_Open_Access_Initiative#/Definition_of_open_access\">BOAI</a> definition of Open Access.\n" +
-    "                    </p>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">is_free_to_read</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    True whenever the <code>free_fulltext_url</code> is not <code>None</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">is_subscription_journal</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    True whenever the journal is <em>not</em> in the DOAJ or DataCite.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">license</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The license under which the article is published.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Example values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            Creative Commons licenses are uniformly abbreviated and lowercased. Example: <code>cc-by-nc</code>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            Publisher-specific licenses are normalized using this format: <code>acs-specific: authorchoice/editors choice usage agreement</code>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_color</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Provides information about the host of the OA copy\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Possible values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <code>Gold</code> means the <code>free_fulltext_url</code> is served by the article's publisher.\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <code>Green</code> means the <code>free_fulltext_url</code> is served from an OA repository.\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">url</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The URL that the DOI resolves to.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\"></td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "        </table>\n" +
-    "\n" +
-    "\n" +
-    "    </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "    <!--\n" +
-    "\n" +
-    "    API VERSION 2\n" +
-    "    ######################################################################################\n" +
-    "    -->\n" +
-    "\n" +
-    "    <h2 id=\"api-v2\">API version 2</h2>\n" +
-    "    <div class=\"version notes\">\n" +
-    "        Version 2 will become the default version on October 1, 2017, and we recommend that new users build on this version. Use it now by prepending <code>/v2</code> to each endpoint.\n" +
-    "    </div>\n" +
-    "\n" +
-    "    <p>\n" +
-    "        The REST API gives anyone free, programmatic access to all of oaDOI's data.\n" +
-    "        There's no rate limit, but if you need more than 100k calls/day you\n" +
-    "        may want to download the datasets instead.\n" +
-    "    </p>\n" +
-    "    <p>\n" +
-    "        Requests must include your email, so that we can\n" +
-    "        get in touch if something breaks, and so we can report usage to our funders.\n" +
-    "        Add the email as a parameter at the end of the URL, like this:\n" +
-    "        <code>?email=YOUR_EMAIL</code>.\n" +
-    "    </p>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "    <div class=\"endpoint\">\n" +
-    "        <code class=\"endpoint\">GET /v2</code>\n" +
-    "        <p>\n" +
-    "            gets information about the API.\n" +
-    "            Returns a status object with version number. Try it here:\n" +
-    "             <a href=\"https://api.oadoi.org\">https://api.oadoi.org/v2?email=test@example.com</a>\n" +
-    "        </p>\n" +
-    "\n" +
-    "        <table class=\"api-responses\">\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">documentation_url</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Where you can find documentation for this version.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">msg</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Relevant messages.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">version</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Version string.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    Example: <code>2.0.1</code>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "        </table>\n" +
-    "\n" +
-    "    </div>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "    <div class=\"endpoint\">\n" +
-    "        <code class=\"endpoint\">GET /v2/:doi</code>\n" +
-    "        <p>\n" +
-    "            gets data about a single DOI.  Try this example:\n" +
-    "            <a href=\"https://api.oadoi.org/v2/10.1038/nature12373\">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>\n" +
-    "\n" +
-    "        </p>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "        <table class=\"api-responses\">\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">data_standard</span>\n" +
-    "                    <span class=\"type\">Integer</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Indicates the data collection approaches used for this article.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Possible values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>1</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                First-generation hybrid detection. Uses only data from the Crossref API to determine hybrid status. Does a good job for Elsevier articles and a few other publishers, but most publishers are not checked for hybrid.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>2</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                Second-generation hybrid detection. Uses additional sources, checks all publishers for hybrid. Gets about 10x as much hybrid. <code>data_standard==2</code> is the version used in the paper we wrote about oaDOI.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">doi</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The DOI of this article.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    This is always lowercase.\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">is_oa</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    <code>True</code> if <code>oa_url</code> is not <code>Null</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">journal_issns</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Any ISSNs assigned to the journal publishing this resource.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    Separate ISSNs are sometimes assigned to print and electronic versions of the same journal. If there are multiple ISSNs, they are separated by commas. Example: <code>1232-1203,1532-6203</code>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">journal_name</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The name of the journal publishing this resource.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    The same journal may have multiple name strings (eg, \"J. Foo\", \"Journal of Foo\", \"JOURNAL OF FOO\", etc). These have not been fully normalized within our database, so use with care.\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_archived_somewhere</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    TODO\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_evidence</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Hows we found the <code>oa_url</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <p>\n" +
-    "                        Used for debugging. Don’t depend on the exact contents of this for anything, because values are subject to change without warning. Example values:\n" +
-    "\n" +
-    "                    </p>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>oa journal (via journal title in doaj)</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                We found the name of the journal that publishes this article in the DOAJ database.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>oa repository (via pmcid lookup)</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                We found this article in an index of PubMed Central articles.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_host_type</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The type of host that serves <code>oa_url</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <p>\n" +
-    "                        Describes the host that serves this <em>particular</em> copy of this article living at <code>oa_url</code>. There are two possible values:\n" +
-    "                    </p>\n" +
-    "<ul>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>publisher</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                means the <code>oa_url</code> is served by the article’s publisher (in practice, this means it is hosted on the same domain the DOI resolves to).\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>repository</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                means the <code>oa_url</code> is served by an Open Access repository, rather than by the publisher.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_is_doaj_journal</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    <code>True</code> if the journal hosting this resource is listed in the DOAJ.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    It is common to define gold OA based on inclusion in the DOAJ.\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_license</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The license under which the article is published.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>We return several types of licenses:</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            Creative Commons licenses are uniformly abbreviated and lowercased. Example: <code>cc-by-nc</code>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            Publisher-specific licenses are normalized using this format: <code>acs-specific: authorchoice/editors choice usage agreement</code>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            When we have evidence that an OA license of <em>some</em> kind was used, but it’s not reported directly on the article page, this field returns <code>implied-oa</code>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">updated</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Time when the data for this record was last updated.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    Returned as an <a href=\"https://xkcd.com/1179/\">ISO8601-formatted</a> timestamp. Example: <code>2017-08-17T23:43:27.753663</code>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_url</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    URL where the best fulltext copy of this article lives.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <p>\n" +
-    "                        The fulltext can be in various formats, including PDF, HTML, or even Word.\n" +
-    "                    </p>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">doi_resolver</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The organization in charge of issuing and resolving this DOI.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Possible values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>crossref</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                This is a Crossref DOI\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <span class=\"value\"><code>datacite</code></span>\n" +
-    "                            <span class=\"notes\">\n" +
-    "                                This is a Datacite DOI.\n" +
-    "                            </span>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">is_boai_license</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    True whenever the <code>license</code> is <code>cc-by</code>, <code>cc0</code>, or <code>PD</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <p>\n" +
-    "                        This key attempts to identify articles that meets the widely-used <a\n" +
-    "                            href=\"https://www.wikiwand.com/en/Budapest_Open_Access_Initiative#/Definition_of_open_access\">BOAI</a> definition of Open Access.\n" +
-    "                    </p>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">is_free_to_read</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    True whenever the <code>free_fulltext_url</code> is not <code>None</code>.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">is_subscription_journal</span>\n" +
-    "                    <span class=\"type\">Boolean</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    True whenever the journal is <em>not</em> in the DOAJ or DataCite.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">license</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The license under which the article is published.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Example values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            Creative Commons licenses are uniformly abbreviated and lowercased. Example: <code>cc-by-nc</code>\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            Publisher-specific licenses are normalized using this format: <code>acs-specific: authorchoice/editors choice usage agreement</code>\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">oa_color</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    Provides information about the host of the OA copy\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\">\n" +
-    "                    <h4>Possible values</h4>\n" +
-    "                    <ul>\n" +
-    "                        <li>\n" +
-    "                            <code>Gold</code> means the <code>free_fulltext_url</code> is served by the article's publisher.\n" +
-    "                        </li>\n" +
-    "                        <li>\n" +
-    "                            <code>Green</code> means the <code>free_fulltext_url</code> is served from an OA repository.\n" +
-    "                        </li>\n" +
-    "                    </ul>\n" +
-    "                </td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "            <tr>\n" +
-    "                <td class=\"key\">\n" +
-    "                    <span class=\"name\">url</span>\n" +
-    "                    <span class=\"type\">String</span>\n" +
-    "                </td>\n" +
-    "                <td class=\"contents\">\n" +
-    "                    The URL that the DOI resolves to.\n" +
-    "                </td>\n" +
-    "                <td class=\"notes\"></td>\n" +
-    "            </tr>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "        </table>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "    <!--\n" +
-    "\n" +
-    "    DATASETS\n" +
-    "    ######################################################################################\n" +
-    "    -->\n" +
-    "\n" +
-    "    <h2 id=\"datasets\">Datasets</h2>\n" +
+    "    <h2>Datasets</h2>\n" +
     "    <p>\n" +
     "        The datasets behind the oaDOI API are available for download as two big CSV files.\n" +
     "        They are free for use in\n" +
     "        non-commercial academic research.\n" +
-    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you're interested in downloading it.\n" +
+    "        <a href=\"mailto:team@impactstory.org\">Contact us</a> if you're interested in downloading them.\n" +
     "\n" +
     "    </p>\n" +
     "    <p>\n" +
@@ -2180,10 +1362,6 @@ angular.module("api.tpl.html", []).run(["$templateCache", function($templateCach
     "        use, check out our\n" +
     "        <a href=\"sla\">service-level agreement</a> program.\n" +
     "    </p>\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "</div>\n" +
     "</div>");
 }]);
 
