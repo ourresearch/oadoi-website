@@ -146,6 +146,7 @@
     --------------------------------------------------------------------------->
 
     <h2 id="response-objects">Response objects</h2>
+    <p>The API returns three different types of response objects. Really two, since more users won't ever need the API Status object, which just defines the root of the API. The OA Location object describes a place we found an OA copy of an article. There are one or more of these associated with DOI object, which describes a given DOI-assigned resource.</p>
 
 
     <h3 id="api-status-object">API Status object</h3>
@@ -465,6 +466,58 @@
             </td>
             <td class="notes">
                 The same journal may have multiple name strings (eg, "J. Foo", "Journal of Foo", "JOURNAL OF FOO", etc). These have not been fully normalized within our database, so use with care.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="key">
+                <span class="name">oa_locations</span>
+                <span class="type">List</span>
+            </td>
+            <td class="contents">
+                List of all the <a href="#oa-location-object">OA Location</a> objects associated with this resource.
+            </td>
+            <td class="notes">
+                This list is unnecessary for the vast majority of use-cases, since you probably just want the <code>best_oa_location</code>. It's included primarily for research purposes.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="key">
+                <span class="name">publisher</span>
+                <span class="type">String</span>
+            </td>
+            <td class="contents">
+                The name of this resource's publisher.
+            </td>
+            <td class="notes">
+                Keep in mind that publisher name strings change over time, particularly as publishers are acquired or split up.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="key">
+                <span class="name">title</span>
+                <span class="type">String</span>
+            </td>
+            <td class="contents">
+                The title of this resource.
+            </td>
+            <td class="notes">
+                It's the title. Pretty straightforward.
+            </td>
+        </tr>
+
+        <tr>
+            <td class="key">
+                <span class="name">updated</span>
+                <span class="type">String</span>
+            </td>
+            <td class="contents">
+                Time when the data for this resource was last updated.
+            </td>
+            <td class="notes">
+                Returned as an <a href="https://xkcd.com/1179/">ISO8601-formatted</a> timestamp. Example: <code>2017-08-17T23:43:27.753663</code>
             </td>
         </tr>
 

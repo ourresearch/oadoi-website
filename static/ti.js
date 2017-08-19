@@ -929,6 +929,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "    --------------------------------------------------------------------------->\n" +
     "\n" +
     "    <h2 id=\"response-objects\">Response objects</h2>\n" +
+    "    <p>The API returns three different types of response objects. Really two, since more users won't ever need the API Status object, which just defines the root of the API. The OA Location object describes a place we found an OA copy of an article. There are one or more of these associated with DOI object, which describes a given DOI-assigned resource.</p>\n" +
     "\n" +
     "\n" +
     "    <h3 id=\"api-status-object\">API Status object</h3>\n" +
@@ -1248,6 +1249,58 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "            </td>\n" +
     "            <td class=\"notes\">\n" +
     "                The same journal may have multiple name strings (eg, \"J. Foo\", \"Journal of Foo\", \"JOURNAL OF FOO\", etc). These have not been fully normalized within our database, so use with care.\n" +
+    "            </td>\n" +
+    "        </tr>\n" +
+    "\n" +
+    "        <tr>\n" +
+    "            <td class=\"key\">\n" +
+    "                <span class=\"name\">oa_locations</span>\n" +
+    "                <span class=\"type\">List</span>\n" +
+    "            </td>\n" +
+    "            <td class=\"contents\">\n" +
+    "                List of all the <a href=\"#oa-location-object\">OA Location</a> objects associated with this resource.\n" +
+    "            </td>\n" +
+    "            <td class=\"notes\">\n" +
+    "                This list is unnecessary for the vast majority of use-cases, since you probably just want the <code>best_oa_location</code>. It's included primarily for research purposes.\n" +
+    "            </td>\n" +
+    "        </tr>\n" +
+    "\n" +
+    "        <tr>\n" +
+    "            <td class=\"key\">\n" +
+    "                <span class=\"name\">publisher</span>\n" +
+    "                <span class=\"type\">String</span>\n" +
+    "            </td>\n" +
+    "            <td class=\"contents\">\n" +
+    "                The name of this resource's publisher.\n" +
+    "            </td>\n" +
+    "            <td class=\"notes\">\n" +
+    "                Keep in mind that publisher name strings change over time, particularly as publishers are acquired or split up.\n" +
+    "            </td>\n" +
+    "        </tr>\n" +
+    "\n" +
+    "        <tr>\n" +
+    "            <td class=\"key\">\n" +
+    "                <span class=\"name\">title</span>\n" +
+    "                <span class=\"type\">String</span>\n" +
+    "            </td>\n" +
+    "            <td class=\"contents\">\n" +
+    "                The title of this resource.\n" +
+    "            </td>\n" +
+    "            <td class=\"notes\">\n" +
+    "                It's the title. Pretty straightforward.\n" +
+    "            </td>\n" +
+    "        </tr>\n" +
+    "\n" +
+    "        <tr>\n" +
+    "            <td class=\"key\">\n" +
+    "                <span class=\"name\">updated</span>\n" +
+    "                <span class=\"type\">String</span>\n" +
+    "            </td>\n" +
+    "            <td class=\"contents\">\n" +
+    "                Time when the data for this resource was last updated.\n" +
+    "            </td>\n" +
+    "            <td class=\"notes\">\n" +
+    "                Returned as an <a href=\"https://xkcd.com/1179/\">ISO8601-formatted</a> timestamp. Example: <code>2017-08-17T23:43:27.753663</code>\n" +
     "            </td>\n" +
     "        </tr>\n" +
     "\n" +
