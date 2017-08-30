@@ -464,7 +464,6 @@ angular.module("api-v1.tpl.html", []).run(["$templateCache", function($templateC
     "        <h3>Example</h3>\n" +
     "         <a href=\"https://api.oadoi.org?email=test@example.com\">https://api.oadoi.org?email=test@example.com</a>\n" +
     "\n" +
-    "\n" +
     "        <h3>Response Keys</h3>\n" +
     "\n" +
     "        <table class=\"api-responses\">\n" +
@@ -858,7 +857,7 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "                    Example\n" +
     "                </td>\n" +
     "                <td class=\"v\">\n" +
-    "                    <a href=\"https://api.oadoi.org?email=test@example.com\">https://api.oadoi.org?email=test@example.com</a>\n" +
+    "                    <a href=\"https://api.oadoi.org/v2?email=test@example.com\">https://api.oadoi.org/v2?email=test@example.com</a>\n" +
     "                </td>\n" +
     "            </tr>\n" +
     "        </table>\n" +
@@ -905,10 +904,11 @@ angular.module("api-v2.tpl.html", []).run(["$templateCache", function($templateC
     "                    Example\n" +
     "                </td>\n" +
     "                <td class=\"v\">\n" +
-    "                    <a href=\"https://api.oadoi.org/10.1038/nature12373?email=test@example.com\">https://api.oadoi.org/10.1038/nature12373?email=test@example.com</a>\n" +
+    "                    <a href=\"https://api.oadoi.org/v2/10.1038/nature12373?email=test@example.com\">https://api.oadoi.org/v2/10.1038/nature12373?email=test@example.com</a>\n" +
     "                </td>\n" +
     "            </tr>\n" +
     "        </table>\n" +
+    "\n" +
     "\n" +
     "    </div>\n" +
     "\n" +
