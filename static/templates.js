@@ -1007,6 +1007,13 @@ angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "    <dl>\n" +
     "\n" +
+    "        <dt id=\"data-sources\">How can I make sure my institutional repository is indexed in oaDOI?</dt>\n" +
+    "        <dd>\n" +
+    "            We're working on a web interface that will allow you to add your repository. For now,\n" +
+    "             <a href=\"mailto:team@impactstory\">drop us an email</a> and we'll get you set up.\n" +
+    "        </dd>\n" +
+    "\n" +
+    "\n" +
     "        <dt id=\"data-sources\">Where does your data come from?</dt>\n" +
     "        <dd>\n" +
     "            We use a number of different data sources to find open versions of articles\n" +
@@ -1022,6 +1029,11 @@ angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCach
     "            </ul>\n" +
     "        </dd>\n" +
     "\n" +
+    "        <p>\n" +
+    "            We used to use the <a href=\"https://www.base-search.net/\">BASE OA search engine</a> to help us find OA copies.  It's a great service.\n" +
+    "            However, BASE has some reuse restrictions on their data that weren't a good fit for us,\n" +
+    "            so we've reimplemented our own repository aggregator and no longer use BASE.\n" +
+    "        </p>\n" +
     "\n" +
     "        <dt id=\"creators\">Who is behind oaDOI?</dt>\n" +
     "        <dd>\n" +
