@@ -1015,10 +1015,7 @@ angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCach
     "                <li>The <a href=\"https://doaj.org/\">Directory of Open Access Journals</a> to see if it’s in their index of OA journals.</li>\n" +
     "                <li><a href=\"http://crossref.org/\">CrossRef’s</a> license metadata field, to see if the publisher has reported an open license.</li>\n" +
     "                <li>Our own custom list DOI prefixes, to see if it's in a known preprint repository.</li>\n" +
-    "                <li><a href=\"http://datacite.org/\">DataCite</a>, to see if it’s an open dataset.</li>\n" +
-    "                <li>The wonderful <a href=\"https://www.base-search.net/\">BASE OA search engine</a> to see if there’s a Green OA copy of the article.\n" +
-    "                BASE indexes 90mil+ open documents in 4000+ repositories by harvesting OAI-PMH metadata.</li>\n" +
-    "                <li>Repository pages directly, in cases where BASE was unable to determine openness.</li>\n" +
+    "                <li>Repository pages, to see if the author's uploaded the paper to their institutional or subject repository.</li>\n" +
     "                <li>Journal article pages directly, to see if there’s a free PDF link (this is great for detecting hybrid OA)</li>\n" +
     "            </ul>\n" +
     "        </dd>\n" +
