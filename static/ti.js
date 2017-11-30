@@ -1428,10 +1428,9 @@ angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCach
     "\n" +
     "        <dt id=\"data-sources\">How can I make sure my institutional repository is indexed in oaDOI?</dt>\n" +
     "        <dd>\n" +
-    "            We're working on a web interface that will allow you to add your repository. For now,\n" +
+    "            We're working on a web interface that will walk you through adding your repository to the index. That's not done yet.  For now,\n" +
     "             <a href=\"mailto:team@impactstory\">drop us an email</a> and we'll get you set up.\n" +
     "        </dd>\n" +
-    "\n" +
     "\n" +
     "        <dt id=\"data-sources\">Where does your data come from?</dt>\n" +
     "        <dd>\n" +
