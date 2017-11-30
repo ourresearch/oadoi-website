@@ -1015,8 +1015,10 @@ angular.module("faq.tpl.html", []).run(["$templateCache", function($templateCach
     "                <li>The <a href=\"https://doaj.org/\">Directory of Open Access Journals</a> to see if it’s in their index of OA journals.</li>\n" +
     "                <li><a href=\"http://crossref.org/\">CrossRef’s</a> license metadata field, to see if the publisher has reported an open license.</li>\n" +
     "                <li>Our own custom list DOI prefixes, to see if it's in a known preprint repository.</li>\n" +
-    "                <li>Repository pages, to see if the author's uploaded the paper to their institutional or subject repository.</li>\n" +
-    "                <li>Journal article pages directly, to see if there’s a free PDF link (this is great for detecting hybrid OA)</li>\n" +
+    "                <li>Institutional repositories, like <a href=\"https://dash.harvard.edu/\">Harvard's DASH</a>,\n" +
+    "                    <a href=\"https://deepblue.lib.umich.edu/documents\">University of Michigan's Deep Blue</a>, and thousands more.</li>\n" +
+    "                <li>Subject repositories, like <a href=\"https://arxiv.org\">arXiv</a>, <a href=\"https://www.ncbi.nlm.nih.gov/pmc/\">PMC</a>, and many others.</li>\n" +
+    "                <li>Journal article pages directly, to see if there’s a free PDF link from the publisher.</li>\n" +
     "            </ul>\n" +
     "        </dd>\n" +
     "\n" +
