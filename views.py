@@ -100,7 +100,7 @@ def stuff_before_request():
 @app.route("/<path:foo>")
 @app.route("/")
 def index_endpoint(foo=None):
-    url = "http://unpaywall.org/api"
+    url = "http://unpaywall.org/data"
     return redirect(url, 301)  # 301 is permanent redirect
 
 
