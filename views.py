@@ -97,54 +97,12 @@ def stuff_before_request():
 
 
 
-@app.route("/favicon.ico")
-def favicon_ico():
-    return redirect(url_for("static", filename="img/favicon.ico"))
-
-@app.route("/browser-tools/bookmarklet.js")
-def bookmarklet_js():
-    base_url = request.url.replace(
-        "browser-tools/bookmarklet.js",
-        "static/browser-tools/"
-    )
-
-    if "localhost:" not in base_url:
-        # seems like this shouldn't be necessary. but i think
-        # flask's request.url is coming in with http even when
-        # we asked for https on the server. weird.
-        base_url = base_url.replace("http://", "https://")
-
-    rendered = render_template(
-        "browser-tools/bookmarklet.js",
-        base_url=base_url
-    )
-    resp = make_response(rendered, 200)
-    resp.mimetype = "application/javascript"
-    return resp
-
-
-
-@app.route("/<path:doi>")
+@app.route("/<path:foo>")
 @app.route("/")
-def index_endpoint(doi=""):
+def index_endpoint(foo=None):
+    url = "http://unpaywall.org/api"
+    return redirect(url, 301)  # 301 is permanent redirect
 
-    # the DOI resolver (redirects to the article)
-    if doi and doi.startswith("10."):
-
-        resp = requests.get("https://api.oadoi.org/" + doi)
-        data = resp.json()["results"][0]
-        if data["free_fulltext_url"]:
-            url = data["free_fulltext_url"]
-        else:
-            url = data["url"]
-
-        return redirect(url, 302)  # 302 is temporary redirect
-
-    # no DOI, so return the Angular app
-    else:
-        return render_template(
-            'index.html'
-        )
 
 
 
