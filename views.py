@@ -94,12 +94,26 @@ def stuff_before_request():
         return redirect(new_url, 301)  # permanent
 
 
-
-
-
-@app.route("/<path:foo>")
+@app.route("/<path:doi>")
 @app.route("/")
-def index_endpoint(foo=None):
+def index_endpoint(doi=""):
+
+    # the DOI resolver (redirects to the article)
+    if doi and doi.startswith("10."):
+        try:
+            resp = requests.get("https://api.unpaywall.org/v2/" + doi)
+            if resp.status_code == 200:
+                data = resp.json()
+                if data["best_oa_location"]:
+                    url = data["best_oa_location"]["url"]
+            else:
+                url = u"http://doi.org/{}".format(doi)
+            return redirect(url, 302)  # 302 is temporary redirect
+        except Exception:
+            logger.info(u"exception calling api.unpaywall.org, so redirecting to data documentation page")
+            pass
+
+    # no DOI, so return the Angular app
     url = "http://unpaywall.org/data"
     return redirect(url, 301)  # 301 is permanent redirect
 
