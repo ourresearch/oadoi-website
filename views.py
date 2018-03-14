@@ -103,7 +103,7 @@ def index_endpoint(doi=""):
     # the DOI resolver (redirects to the article)
     if doi and doi.startswith("10."):
         try:
-            resp = requests.get("https://api.unpaywall.org/v2/" + doi)
+            resp = requests.get("https://api.unpaywall.org/v2/{}?email=team+redirect@impactstory.org".format(doi))
             if resp.status_code == 200:
                 data = resp.json()
                 if data["best_oa_location"]:
