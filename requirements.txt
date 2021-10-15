@@ -5,4 +5,4 @@ itsdangerous==0.24
 Jinja2==2.8
 requests[security]==2.25.1
 requests-cache==0.4.12
-Werkzeug==0.11.2
+Werkzeug==0.15.3
