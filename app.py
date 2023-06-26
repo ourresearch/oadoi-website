@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_talisman import Talisman
 import logging
 import sys
 import requests
@@ -31,6 +32,8 @@ requests.packages.urllib3.disable_warnings()
 
 app = Flask(__name__)
 # app.debug = True
+
+Talisman(app, force_https=True)
 
 
 
